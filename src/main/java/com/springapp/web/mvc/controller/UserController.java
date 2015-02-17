@@ -4,6 +4,7 @@ import com.springapp.domain.exception.ExistException;
 import com.springapp.domain.exception.UserExistException;
 import com.springapp.domain.model.User;
 import com.springapp.service.UserService;
+import com.springapp.web.Route;
 import com.springapp.web.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -56,6 +60,22 @@ public class UserController {
 //            result.rejectValue("mail", "user.mail.exist", "L'adresse est déjà utilisée");
 //            return "add-user";
 //        }
+    }
+
+    /**
+     * Display all users 
+     * @return
+     */
+    @RequestMapping(value = Route.users, method = RequestMethod.GET)
+    public ModelAndView users(){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("users");
+        
+        List<User> users = this.userService.findAll();
+        
+        
+        model.addObject("users", users);
+        return model;
     }
 
 }

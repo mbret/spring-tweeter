@@ -16,11 +16,11 @@ public class Tweet {
 
     @Id
     @Column(name = "id", length = 36)
-	private String id;
+	private Double id;
     
 	private User user;
     
-    private Double userID;
+    private String userID;
     
 	private Date date = new Date();
     
@@ -29,7 +29,8 @@ public class Tweet {
     public Tweet() {
     }
 
-    public Tweet(String content) {
+    public Tweet(User user, String content) {
+        this.user = user;
         this.content = content;
     }
 
@@ -37,11 +38,11 @@ public class Tweet {
 		return new SimpleDateFormat(textFormat).format(date);
 	}
 
-    public String getId() {
+    public Double getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Double id) {
         this.id = id;
     }
 
@@ -53,11 +54,11 @@ public class Tweet {
         this.user = user;
     }
 
-    public Double getUserID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void setUserID(Double userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
 

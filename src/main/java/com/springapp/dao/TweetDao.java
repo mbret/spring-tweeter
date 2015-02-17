@@ -8,6 +8,6 @@ import java.util.List;
 @CacheConfig(cacheNames={"tweets"})
 public interface TweetDao extends Dao<Tweet> {
     
-    public List<Tweet> findAllByUser(Integer userID);
+    public List<Tweet> findAllByUser(Object id);
 
 }

@@ -61,7 +61,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         Properties mappings = new Properties();
         resolver.setExceptionMappings(mappings); // None by default
         resolver.setExceptionAttribute("ErrorOccurred"); // Default is "exception"
-        resolver.setDefaultErrorView("500"); // 500.jsp
+        resolver.setDefaultErrorView("../common/500"); // 500.jsp
         return resolver;
     }
     

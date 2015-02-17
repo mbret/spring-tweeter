@@ -37,8 +37,8 @@ public class TweetServiceDao implements TweetService {
     }
 
     @Override
-    public void getTweets(Integer userID) {
-        this.tweetDao.findAllByUser(userID);
+    public List<Tweet> findAllByUser(Object id) {
+        return this.tweetDao.findAllByUser( id );
     }
 
     @Override

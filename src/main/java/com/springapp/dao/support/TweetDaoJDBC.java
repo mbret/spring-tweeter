@@ -20,7 +20,7 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     private static final String GET_TWEETS          = "SELECT * FROM tweet";
     private static final String GET_TWEETS_BY_USER  = "SELECT * FROM tweet WHERE user = ?";
-    private static final String CREATE              = "INSERT INTO tweet(content) VALUES(?)";
+    private static final String CREATE              = "INSERT INTO tweet(content, user) VALUES(?, ?)";
 
     @Override
     public List<Tweet> findAll() {
@@ -35,12 +35,12 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     @Override
     public void create(Tweet tweet) {
-        this.jdbcTemplate.update(CREATE, tweet.getContent());
+        this.jdbcTemplate.update(CREATE, tweet.getContent(), tweet.getUser().getId());
     }
 
     @Override
-    public List<Tweet> findAllByUser(Integer userID) {
-        List list = this.jdbcTemplate.queryForList( GET_TWEETS_BY_USER, new TweetMapper(), userID);
+    public List<Tweet> findAllByUser(Object id) {
+        List list = this.jdbcTemplate.query( GET_TWEETS_BY_USER, new TweetMapper(), id);
         return list;
     }
 
@@ -54,6 +54,9 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
         @Override
         public Tweet mapRow(ResultSet rs, int rowNum) throws SQLException {
             Tweet tweet = new Tweet();
+            tweet.setContent(rs.getString("content"));
+            tweet.setId(rs.getDouble("id"));
+            tweet.setUserID(rs.getString("user"));
             return tweet;
         }
 

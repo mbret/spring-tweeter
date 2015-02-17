@@ -11,11 +11,13 @@ public class Route {
     public static final String login = "/login.html";
     public static final String logout = "/login.html?logout";
     public static final String tweet = "/tweets.html";
-    public static final String tweets = "/tweets.html";
+    public static final String tweets = "/users/tweets.html";
     public static final String postTweet = "/tweets.html";
-    public static final String subscriptions = "/tweets/subscriptions.html";
-    public static final String subscribe = "/tweets/subscribe.html";
-    public static final String unsubscribe = "/tweets/unsubscribe.html";
+    public static final String subscriptions = "/subscriptions.html";
+    public static final String subscribe = "/subscriptions/subscribe.html";
+    public static final String unsubscribe = "/subscriptions/unsubscribe.html";
+    public static final String users = "/users.html";
+
 
     {
         if(routes == null)

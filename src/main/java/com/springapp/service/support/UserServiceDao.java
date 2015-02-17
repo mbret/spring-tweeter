@@ -152,6 +152,6 @@ public class UserServiceDao implements UserService {
 
     @Override
     public List findAll() {
-        return null;
+        return this.userDao.findAll();
     }
 }

@@ -12,6 +12,5 @@ import java.util.List;
 
 public interface TweetService extends Service<Tweet>{
 
-    public abstract void getTweets(Integer userID);
-
+    public abstract List<Tweet> findAllByUser(Object id);
 }

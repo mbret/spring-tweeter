@@ -67,7 +67,8 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 
     @Override
     public List<User> findAll() {
-        return null;
+        List list = this.jdbcTemplate.query(GET_USERS, new UserMapper());
+        return list;
     }
 
     @Override

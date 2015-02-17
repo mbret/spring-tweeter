@@ -17,5 +17,16 @@
     
     User with id = <c:out value="${user.id}"/>
 
+    <h2>Tweets</h2>
+    <table>
+        <c:forEach var="tweet" items="${tweets}">
+            <tr>
+                <td> user = <c:out value="${tweet.userID}"/> </td>
+                <td> content = <c:out value="${tweet.content}"/> </td>
+                <td> date = <c:out value="${tweet.date}"/> </td>
+            </tr>
+        </c:forEach>
+    </table>
+
 </body>
 </html>
