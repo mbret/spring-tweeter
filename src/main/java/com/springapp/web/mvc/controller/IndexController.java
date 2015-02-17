@@ -5,6 +5,7 @@ import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 import com.springapp.service.TweetService;
 import com.springapp.service.UserService;
+import com.springapp.web.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,6 +41,8 @@ public class IndexController {
     public ModelAndView showIndex() {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
+        
+        model.addObject("route", Route.getRoutes());
         return model;
     }
 

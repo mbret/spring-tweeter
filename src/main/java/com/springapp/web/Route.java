@@ -10,23 +10,19 @@ public class Route {
     public static final String home = "/index.html";
     public static final String login = "/login.html";
     public static final String logout = "/login.html?logout";
-    public static final String tweet = "/tweets.html";
+    public static final String tweet = "/users/tweets/detail.html";
     public static final String tweets = "/users/tweets.html";
-    public static final String postTweet = "/tweets.html";
+    public static final String postTweet = "/tweets/post.html";
     public static final String subscriptions = "/subscriptions.html";
     public static final String subscribe = "/subscriptions/subscribe.html";
     public static final String unsubscribe = "/subscriptions/unsubscribe.html";
     public static final String users = "/users.html";
 
-
-    {
-        if(routes == null)
-        {
-            routes = new HashMap<String, String>();
-
-            routes.put("host", host);
-            routes.put("home", host + home);
-        }
+    // Used in views
+    // substring remove the first /
+    static {
+        routes = new HashMap<String, String>();
+        routes.put("postTweet", postTweet.substring(1));
     }
 
     public static HashMap<String, String> getRoutes()
