@@ -12,13 +12,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <jsp:include page="../common/head.jsp" />
 <body>
-<h1>Index</h1>
-
-<ul>
-    <li><a href="${contextPath}/example.html">Example page</a></li>
-    <li><a href="${contextPath}/users.html">See users</a></li>
-</ul>
-
-<jsp:include page="../common/footer.jsp" />
+	<div class="main">
+		<jsp:include page="../common/menuNotConnected.jsp" />
+		<div class="tweets" role="content">     
+			<article>     
+				<p>Tweet 2</p>
+			</article>
+			<hr/>
+			<article>
+				<p>Tweet 2</p>
+			</article>
+			<li><a href="${contextPath}/example.html">Example page</a></li>
+    		<li><a href="${contextPath}/users.html">See users</a></li>
+		</div>
+		<jsp:include page="../common/footer.jsp" />  
+	</div>  
 </body>
 </html>

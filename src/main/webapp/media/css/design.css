@@ -1,0 +1,179 @@
+*{ 
+font-family:arial; 
+font-size:12px; 
+} 
+img{ 
+border:none; 
+} 
+a{ 
+color:darkblue; 
+} 
+body{ 
+background:#bbb; 
+margin:0px; 
+} 
+.main{ 
+margin:0px auto; 
+width:1000px; 
+background:#fff; 
+border:2px solid #444; 
+box-shadow: 1px 1px 12px #555; 
+} 
+.menu{ 
+background:#444; 
+height:30px; 
+} 
+	
+      .main .menu .button-group{ 
+			float:left;
+       } 
+	      .main .menu .button-group ul{ 
+	       margin:0px; 
+	       padding:0px; 
+	       height:30px; 
+	       } 
+	       .main .menu .button-group a{ 
+	       text-decoration:none; 
+	       color:white; 
+	       font-weight:bold; 
+	       } 
+	       .main .menu .button-group li{ 
+	       padding:0px 20px; 
+	       margin:0px; 
+	       list-style:none; 
+	       display:inline-block; 
+	       height:23px; 
+	       padding-top:7px; 
+	       } 
+	       .main .menu .button-group .selectionne{ 
+	       background:#222; 
+	       }         
+	       .main .menu .button-group li:hover{ 
+	       background:#222; 
+	       }          
+       .main .menu .button-indiv{ 
+       	 margin-left: 800px;
+       } 
+             
+	       .main .menu .button-indiv a{ 
+	       	 float:right;
+	       	 padding-right:12px;
+	       } 
+	        
+	       .main .menu .button-indiv p { 	       
+		       font-weight:bold; 
+		       	color:white;
+		       	 float:right;
+		       	 margin-top:5px;
+	       } 
+/*
+.main .content form .textarea, .main .content form .input{ 
+width:100%; 
+} 
+.tb_list{ 
+border-collapse: collapse; 
+} 
+.tb_list th,.tb_list td{ 
+border:1px solid gray; 
+} 
+.tb_list th{ 
+text-align:left; 
+} 
+.tb_list td{ 
+vertical-align:top; 
+} 
+.tb_list .alt td{ 
+background:#eee; 
+} 
+.profil{ 
+border-collapse:collapse; 
+width:680px; 
+margin:10px; 
+} 
+.profil td{ 
+border:1px solid #777; 
+padding:8px; 
+color:#777; 
+} 
+.profil td strong{ 
+color:#000; 
+} 
+.tb_posts{ 
+margin:4px; 
+margin-top:20px; 
+width:680px; 
+border-collapse:collapse; 
+} 
+.tb_posts td{ 
+padding:6px; 
+padding-bottom:20px; 
+border-top:1px solid #ccc; 
+} 
+.tb_posts strong{ 
+font-size:14px; 
+} 
+.tb_posts a{ 
+text-decoration:none; 
+} 
+.tb_subscriptions{ 
+margin:4px; 
+margin-top:20px; 
+width:680px; 
+border-collapse:collapse; 
+} 
+.tb_subscriptions td{ 
+padding:6px; 
+padding-bottom:20px; 
+border-top:1px solid #ccc; 
+} 
+.profil{ 
+border-collapse:collapse; 
+width:678px; 
+margin:10px; 
+margin-top:5px; 
+} 
+.profil td{ 
+border:1px solid #777; 
+padding:8px; 
+color:#777; 
+} 
+.profil td strong{ 
+color:#000; 
+} 
+.btn, .btnDisabled{ 
+border:2px solid #196160; 
+background:#2a9190 ; 
+display:inline-block; 
+text-decoration:none; 
+padding:2px 6px; 
+color:white; 
+font-weight:bold; 
+text-align:center; 
+} 
+.btnDisabled{ 
+border-color:#444; 
+background:#2a9190 ; 
+} 
+.popup{ 
+margin:20px; 
+width:650px; 
+border:3px solid gray 
+} 
+.popup .close{ 
+background:gray; 
+margin-top:0px; 
+text-align:right; 
+} 
+.popup .close a{ 
+color:white; 
+text-decoration:none; 
+} 
+h1{ 
+font-size:14px; 
+padding-left:8px; 
+color:#444; 
+} 
+.tbCenter{ 
+margin:auto; 
+}
+*/
