@@ -8,6 +8,7 @@ import com.springapp.web.Route;
 import com.springapp.web.validation.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,12 +54,51 @@ public class TweetController {
     }
 
     /**
+     * Display a tweet detail.
+     * @param id
+     * @return
+     */
+    @RequestMapping( value = Route.tweet, method = RequestMethod.GET)
+    public ModelAndView tweet(
+            @RequestParam("id") String id
+    ){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("tweet-detail");
+
+        Tweet tweet = this.tweetService.findOne(id);
+
+        model.addObject("tweet", tweet);
+        return model;
+    }
+
+    /**
+     * Display new tweet form
+     * @return
+     */
+    @RequestMapping( value = Route.postTweet, method = RequestMethod.GET)
+    public ModelAndView postTweet(){
+        ModelAndView model = new ModelAndView();
+        model.setViewName("tweet-post");
+        
+        model.addObject("command", new Tweet());
+        model.addObject("route", Route.getRoutes());
+
+        return model;
+    }
+    
+    /**
      * Display new tweet form
      * @return
      */
     @RequestMapping( value = Route.postTweet, method = RequestMethod.POST)
-    public String postTweetProcess(){
-        return "test";
+    public ModelAndView  postTweetProcess(
+            @ModelAttribute Tweet tweet, Model model
+    ){
+
+        tweet.setUserID("test");
+        this.tweetService.create(tweet);
+
+        return new ModelAndView("redirect:" + Route.tweet + "?id=" + tweet.getId().toString());
 
     }
 

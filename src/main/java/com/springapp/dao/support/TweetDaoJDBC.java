@@ -2,13 +2,19 @@ package com.springapp.dao.support;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.springapp.dao.TweetDao;
 import com.springapp.domain.model.Tweet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -20,8 +26,17 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     private static final String GET_TWEETS          = "SELECT * FROM tweet";
     private static final String GET_TWEETS_BY_USER  = "SELECT * FROM tweet WHERE user = ?";
+    private static final String GET_TWEET           = "SELECT * FROM tweet WHERE id = ?";
     private static final String CREATE              = "INSERT INTO tweet(content, user) VALUES(?, ?)";
 
+    @Override
+    @Autowired
+    public void setSimpleJdbcInsert(DataSource dataSource) {
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("tweet")
+                .usingGeneratedKeyColumns("id");
+    }
+    
     @Override
     public List<Tweet> findAll() {
         List list = this.jdbcTemplate.query(GET_TWEETS, new TweetMapper());
@@ -30,23 +45,27 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     @Override
     public Tweet findOne(Object id) {
-        return null;
+        return this.jdbcTemplate.queryForObject(GET_TWEET, new TweetMapper(), id);
     }
 
     @Override
     public void create(Tweet tweet) {
-        this.jdbcTemplate.update(CREATE, tweet.getContent(), tweet.getUser().getId());
+        // mandatory to use default value (for date)
+        this.simpleJdbcInsert.usingColumns("user", "content");
+        
+        SqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("user", tweet.getUserID())
+                .addValue("content", tweet.getContent());
+        
+        // create insert and get generated key
+        Number newId = this.simpleJdbcInsert.executeAndReturnKey(parameters);
+        tweet.setId(newId.doubleValue());
     }
 
     @Override
     public List<Tweet> findAllByUser(Object id) {
-        List list = this.jdbcTemplate.query( GET_TWEETS_BY_USER, new TweetMapper(), id);
+        List list = this.jdbcTemplate.query(GET_TWEETS_BY_USER, new TweetMapper(), id);
         return list;
-    }
-
-    @Override
-    public void setSimpleJdbcInsert(DataSource dataSource) {
-
     }
 
     private class TweetMapper implements RowMapper<Tweet> {

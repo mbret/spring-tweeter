@@ -7,26 +7,22 @@ public class Route {
     private static HashMap<String, String> routes;
 
     public static final String host = "/";
-    public static final String home = "/index.html";
-    public static final String login = "/login.html";
-    public static final String logout = "/login.html?logout";
-    public static final String tweet = "/tweets.html";
-    public static final String tweets = "/users/tweets.html";
-    public static final String postTweet = "/tweets.html";
-    public static final String subscriptions = "/subscriptions.html";
-    public static final String subscribe = "/subscriptions/subscribe.html";
-    public static final String unsubscribe = "/subscriptions/unsubscribe.html";
-    public static final String users = "/users.html";
+    public static final String home = "/index";
+    public static final String login = "/login";
+    public static final String logout = "/login?logout";
+    public static final String tweet = "/users/tweets/detail";
+    public static final String tweets = "/users/tweets";
+    public static final String postTweet = "/tweets/post";
+    public static final String subscriptions = "/subscriptions";
+    public static final String subscribe = "/subscriptions/subscribe";
+    public static final String unsubscribe = "/subscriptions/unsubscribe";
+    public static final String users = "/users";
 
-
-    {
-        if(routes == null)
-        {
-            routes = new HashMap<String, String>();
-
-            routes.put("host", host);
-            routes.put("home", host + home);
-        }
+    // Used in views
+    // substring remove the first /
+    static {
+        routes = new HashMap<String, String>();
+        routes.put("postTweet", postTweet.substring(1));
     }
 
     public static HashMap<String, String> getRoutes()

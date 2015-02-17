@@ -6,46 +6,29 @@
 <body>
 <div class="main">
 	<jsp:include page="../common/menuNotConnected.jsp" />
-	<div id="signup">   
-          <h1>Sign Up for Free</h1>
-          
-          <form action="/" method="post">
-          
-          <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div>
-
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
-          
-          <button type="submit" class="button button-block"/>Get Started</button>
-          
-          </form>
-
-        </div>
+	<form:form method="post" modelAttribute="userRegister" action="addUser">
+	
+		<spring:message code="userRegister.name.libelle.name" />
+		<form:input path="name"/>
+		<b><i><form:errors path="name" cssclass="error"/></i></b><br />
+		
+		
+		<spring:message code="userRegister.name.libelle.lastName" />
+		<form:input path="lastName"/>
+		<b><i><form:errors path="lastName" cssclass="error"/></i></b><br />
+		
+		
+		<spring:message code="userRegister.name.libelle.email" />
+		<form:input path="email"/>
+		<b><i><form:errors path="email" cssclass="error"/></i></b><br />
+		
+		
+		<spring:message code="userRegister.name.libelle.password" />
+		<form:input path="password"/>
+		<b><i><form:errors path="password" cssclass="error"/></i></b><br />
+		
+		<input type="submit"/>
+	</form:form>
 	<jsp:include page="../common/footer.jsp" />  
 </div>
 </body>

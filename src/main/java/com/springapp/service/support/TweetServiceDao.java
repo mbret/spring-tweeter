@@ -43,7 +43,7 @@ public class TweetServiceDao implements TweetService {
 
     @Override
     public Tweet findOne(Object id) {
-        return null;
+        return this.tweetDao.findOne(id);
     }
 
     @Override

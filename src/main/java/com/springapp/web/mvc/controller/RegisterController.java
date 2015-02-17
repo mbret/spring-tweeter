@@ -14,7 +14,7 @@ import com.springapp.service.TweetService;
 import com.springapp.service.UserService;
 
 @Controller
-public class Register {
+public class RegisterController {
 
     private UserService userService;
     private TweetService tweetService;

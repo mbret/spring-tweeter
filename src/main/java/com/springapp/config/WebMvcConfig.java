@@ -14,6 +14,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -26,9 +27,21 @@ import java.util.Properties;
         "com.springapp.web.mvc",
         "com.springapp.web.validation"
 })
-@EnableWebMvc
+@EnableWebMvc // <mvc:annotation-driven/>
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
+//        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
+//        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+//        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
+    }
+
+    /**
+     * InternalResourceViewResolver
+     * @return
+     */
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
