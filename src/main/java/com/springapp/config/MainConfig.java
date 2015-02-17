@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
 /**
 * Configuration of the business, persistence and security layers.
@@ -20,7 +21,7 @@ import org.springframework.core.env.Environment;
         ServiceConfig.class,
         DaoConfig.class,
         WebMvcConfig.class,
-        SecurityConfig.class
+        SecurityConfig.class,
 } )
 public class MainConfig {
 
