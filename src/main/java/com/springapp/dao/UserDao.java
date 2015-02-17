@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 
 @CacheConfig(cacheNames={"users"})
-public interface UserDao {
+public interface UserDao extends Dao<User>{
 
 	public List<User> getUsers();
 
@@ -16,8 +16,6 @@ public interface UserDao {
 	public User getUser(String id);
 	
 	public User getUserByMail(String mail);
-
-	public void addUser(User user);
 
 	@CacheEvict(key = "#user.id")
 	public void updateUser(User user);

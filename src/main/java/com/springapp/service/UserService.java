@@ -7,7 +7,7 @@ import com.springapp.domain.exception.UserNotFoundException;
 import com.springapp.domain.model.Password;
 import com.springapp.domain.model.User;
 
-public interface UserService {
+public interface UserService extends Service<User>{
 
     public void registerAccount(User u) throws UserExistException;
 
@@ -23,6 +23,6 @@ public interface UserService {
 
     public void unregisterAccount(User u);
 
-    public void addUser(User user) throws UserExistException;
+//    public void addUser(User user) throws UserExistException;
 
 }

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class TweetController {
 
@@ -31,7 +33,10 @@ public class TweetController {
         ModelAndView model = new ModelAndView();
         model.setViewName("tweets");
         
+        List<Tweet> tweets = this.tweetService.findAll();
         this.tweetService.create( new Tweet("sdfsdf") );
+
+        model.addObject("tweets", tweets);
         return model;
     }
 

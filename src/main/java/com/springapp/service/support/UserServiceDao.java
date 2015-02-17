@@ -1,14 +1,12 @@
 package com.springapp.service.support;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.springapp.dao.ActivationDao;
 import com.springapp.dao.PasswordDao;
 import com.springapp.dao.UserDao;
-import com.springapp.domain.exception.ActivationNotFoundException;
-import com.springapp.domain.exception.AuthenticationException;
-import com.springapp.domain.exception.UserExistException;
-import com.springapp.domain.exception.UserNotFoundException;
+import com.springapp.domain.exception.*;
 import com.springapp.domain.model.Activation;
 import com.springapp.domain.model.Password;
 import com.springapp.domain.model.User;
@@ -54,16 +52,16 @@ public class UserServiceDao implements UserService {
 
         // Create User entry
         try {
-            userDao.addUser(u);
+            userDao.create(u);
         }
         catch(DuplicateKeyException e) {
             throw new UserExistException("User exists " + u.getMail());
         }
-
-        // Create Activation entry
-        Activation a = new Activation();
-        a.setActivationKey(UUID.randomUUID().toString());
-        a.setUserId(u.getId());
+//
+//        // Create Activation entry
+//        Activation a = new Activation();
+//        a.setActivationKey(UUID.randomUUID().toString());
+//        a.setUserId(u.getId());
 
         // Send mail
         // TODO
@@ -109,7 +107,7 @@ public class UserServiceDao implements UserService {
         // Get User entry
         try {
             User u = userDao.getUserByMail(mail);
-            if(!passwordDao.getPassword(u.getId()).equals(password)) {
+            if(!passwordDao.getPassword(u.getId().toString()).equals(password)) {
                 throw new AuthenticationException("Authentication failed " + mail);
             }
             return u;
@@ -143,8 +141,17 @@ public class UserServiceDao implements UserService {
     }
 
     @Override
-    public void addUser(User user) throws UserExistException {
-        //@todo
+    public User findOne(Object id) {
+        return this.userDao.findOne(id);
     }
 
+    @Override
+    public void create(User user){
+        this.userDao.create(user);
+    }
+
+    @Override
+    public List findAll() {
+        return null;
+    }
 }

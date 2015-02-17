@@ -2,7 +2,9 @@ package com.springapp.dao.support;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.springapp.dao.UserDao;
 import com.springapp.domain.model.User;
@@ -15,7 +17,10 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 
 @Repository
 @Qualifier("userdao-jdbc")
@@ -27,10 +32,17 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	private static final String GET_USERS = "SELECT * FROM user";
 	private static final String GET_USER  = "SELECT * FROM user WHERE id = ?";
 	private static final String GET_USERM = "SELECT * FROM user WHERE mail = ?";
-	private static final String ADD_USER  = "INSERT INTO user(id, mail, name, firstname) VALUES(?, ?, ?, ?)";
+	private static final String ADD_USER  = "INSERT INTO user(id, mail, name, firstName) VALUES(?, ?, ?, ?)";
 	private static final String UPD_USER  = "UPDATE user SET mail = ?, name = ?, firstname = ? WHERE id = ?";
 	private static final String DEL_USER  = "DELETE FROM user WHERE id = ?";
 
+    @Override
+    public void setSimpleJdbcInsert(DataSource dataSource) {
+        this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
+                .withTableName("user")
+                .usingGeneratedKeyColumns("id");
+    }
+    
 	public List<User> getUsers() {
 		return jdbcTemplate.query(GET_USERS, new UserMapper());
 	}
@@ -43,10 +55,7 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	public User getUserByMail(String mail) {
 		return jdbcTemplate.queryForObject(GET_USERM, new UserMapper(), mail);
 	}
-
-	public void addUser(User user) {
-		jdbcTemplate.update(ADD_USER, user.getId(), user.getMail(), user.getName(), user.getFirstName());
-	}
+    
 
 	public void updateUser(User user) {
 		jdbcTemplate.update(UPD_USER, user.getMail(), user.getName(), user.getFirstName(), user.getId());
@@ -55,8 +64,28 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	public void deleteUser(String id) {
 		jdbcTemplate.update(DEL_USER, id);
 	}
-	
-	private class UserMapper implements RowMapper<User> {
+
+    @Override
+    public List<User> findAll() {
+        return null;
+    }
+
+    @Override
+    public User findOne(Object id) {
+        return this.jdbcTemplate.queryForObject(GET_USER, new UserMapper(), id);
+    }
+
+    /**
+     * Create a user.
+     * @param user
+     */
+    @Override
+    public void create(User user) {
+        this.jdbcTemplate.update(ADD_USER, user.getId(), user.getMail(), user.getName(), user.getFirstName());
+    }
+
+
+    private class UserMapper implements RowMapper<User> {
 
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();

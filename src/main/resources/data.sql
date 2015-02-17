@@ -24,11 +24,6 @@ SET time_zone = "+00:00";
 -- Dumping data for table `tweet`
 --
 
-INSERT INTO `tweet` (`id`, `content`) VALUES
-(1, 'sdfsdf'),
-(2, 'sdfsdf');
-(3, 'sdfsqsfdqsdf');
-(4, 'qdsdf');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Repository;
 
 import com.springapp.domain.model.Password;
 
+import javax.sql.DataSource;
+
 @Repository
 public class PasswordDaoJDBC extends BaseDaoJDBC implements PasswordDao {
 
@@ -21,4 +23,8 @@ public class PasswordDaoJDBC extends BaseDaoJDBC implements PasswordDao {
 		jdbcTemplate.update(SET_PASSWORD, p.getUserId(), p.getPassword(), p.getPassword());
 	}
 
+    @Override
+    public void setSimpleJdbcInsert(DataSource dataSource) {
+
+    }
 }

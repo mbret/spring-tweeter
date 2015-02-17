@@ -22,6 +22,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -37,11 +38,22 @@ public class TweetServiceDao implements TweetService {
 
     @Override
     public void getTweets(Integer userID) {
-        this.tweetDao.findAll(userID);
+        this.tweetDao.findAllByUser(userID);
+    }
+
+    @Override
+    public Tweet findOne(Object id) {
+        return null;
     }
 
     @Override
     public void create(Tweet tweet) {
         this.tweetDao.create(tweet);
+    }
+
+    @Override
+    public List<Tweet> findAll() {
+        List<Tweet> tweets = this.tweetDao.findAll();
+        return tweets;
     }
 }

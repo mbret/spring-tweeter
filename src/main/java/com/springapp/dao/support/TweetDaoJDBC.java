@@ -11,23 +11,42 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
+
 @Repository
 @Qualifier("tweetdao-jdbc")
 @Lazy
 public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
+    private static final String GET_TWEETS          = "SELECT * FROM tweet";
     private static final String GET_TWEETS_BY_USER  = "SELECT * FROM tweet WHERE user = ?";
     private static final String CREATE              = "INSERT INTO tweet(content) VALUES(?)";
-	
+
     @Override
-	public List<Tweet> findAll(Integer userId) {
-        List list = this.jdbcTemplate.queryForList( GET_TWEETS_BY_USER, new TweetMapper(), userId);
-		return list;
-	}
+    public List<Tweet> findAll() {
+        List list = this.jdbcTemplate.query(GET_TWEETS, new TweetMapper());
+        return list;
+    }
+
+    @Override
+    public Tweet findOne(Object id) {
+        return null;
+    }
 
     @Override
     public void create(Tweet tweet) {
         this.jdbcTemplate.update(CREATE, tweet.getContent());
+    }
+
+    @Override
+    public List<Tweet> findAllByUser(Integer userID) {
+        List list = this.jdbcTemplate.queryForList( GET_TWEETS_BY_USER, new TweetMapper(), userID);
+        return list;
+    }
+
+    @Override
+    public void setSimpleJdbcInsert(DataSource dataSource) {
+
     }
 
     private class TweetMapper implements RowMapper<Tweet> {

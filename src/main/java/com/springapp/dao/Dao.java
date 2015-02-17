@@ -5,9 +5,11 @@ import org.springframework.cache.annotation.CacheConfig;
 
 import java.util.List;
 
-@CacheConfig(cacheNames={"tweets"})
-public interface TweetDao extends Dao<Tweet> {
+public interface Dao<T> {
     
-    public List<Tweet> findAllByUser(Integer userID);
+    public List<T> findAll();
 
+    public T findOne(Object id);
+    
+    public void create(T object);
 }

@@ -8,9 +8,10 @@ import com.springapp.domain.model.Password;
 import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 
-public interface TweetService {
+import java.util.List;
 
-    public void getTweets(Integer userID);
+public interface TweetService extends Service<Tweet>{
 
-    public void create(Tweet tweet);
+    public abstract void getTweets(Integer userID);
+
 }

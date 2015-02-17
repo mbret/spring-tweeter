@@ -1,5 +1,6 @@
 package com.springapp.web.mvc.controller;
 
+import com.springapp.domain.exception.ExistException;
 import com.springapp.domain.exception.UserExistException;
 import com.springapp.domain.model.User;
 import com.springapp.service.UserService;
@@ -47,14 +48,14 @@ public class UserController {
             return "add-user";
 
         // Ajout de l'utilisateur
-        try {
-            userService.addUser(user);
+//        try {
+            userService.create(user);
             return "add-user-success";
-        }
-        catch(UserExistException e) {
-            result.rejectValue("mail", "user.mail.exist", "L'adresse est déjà utilisée");
-            return "add-user";
-        }
+//        }
+//        catch(ExistException e) {
+//            result.rejectValue("mail", "user.mail.exist", "L'adresse est déjà utilisée");
+//            return "add-user";
+//        }
     }
 
 }

@@ -18,7 +18,7 @@
 
     <c:forEach var="tweet" items="${tweets}">
         <tr>
-            <td> <c:out value="${tweet.message}"/> </td>
+            <td> <c:out value="${tweet.content}"/> </td>
             <td> <c:out value="${tweet.date}"/> </td>
         </tr>
     </c:forEach>

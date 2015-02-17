@@ -12,13 +12,24 @@ public class User {
     @Id
     @Column(name = "id", length = 36)
     private String id;
+    
     @Column(name = "mail", unique = true)
     private String mail;
+    
     @Column(name = "name")
     private String name;
+    
     @Column(name = "firstname")
     private String firstName;
 
+    public User() {
+    }
+
+    public User(String firstName, String name, String mail) {
+        this.firstName = firstName;
+        this.name = name;
+        this.mail = mail;
+    }
 
     public String getId() {
         return id;

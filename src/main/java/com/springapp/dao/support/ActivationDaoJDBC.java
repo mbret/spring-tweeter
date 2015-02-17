@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
+
 @Repository
 public class ActivationDaoJDBC extends BaseDaoJDBC implements ActivationDao {
 
@@ -25,4 +27,8 @@ public class ActivationDaoJDBC extends BaseDaoJDBC implements ActivationDao {
 		jdbcTemplate.update(DEL_ACTIVATION, activationId);
 	}
 
+    @Override
+    public void setSimpleJdbcInsert(DataSource dataSource) {
+
+    }
 }
