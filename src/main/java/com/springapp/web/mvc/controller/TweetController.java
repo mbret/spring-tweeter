@@ -1,12 +1,6 @@
 package com.springapp.web.mvc.controller;
 
-import com.springapp.domain.ScopedValue;
-import com.springapp.domain.model.Tweet;
-import com.springapp.domain.model.User;
-import com.springapp.service.TweetService;
-import com.springapp.service.UserService;
-import com.springapp.web.Route;
-import com.springapp.web.validation.UserValidator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import com.springapp.domain.ScopedValue;
+import com.springapp.domain.exception.UserNotFoundException;
+import com.springapp.domain.model.Tweet;
+import com.springapp.domain.model.User;
+import com.springapp.service.TweetService;
+import com.springapp.service.UserService;
+import com.springapp.web.Route;
 
 @Controller
 public class TweetController {
@@ -53,18 +53,41 @@ public class TweetController {
     public ModelAndView tweets(
             @RequestParam("user") String id
     ){
-        ModelAndView model = new ModelAndView();
-        model.setViewName("tweets");
-
+        return listeTweetsByUserId(id);
+    }
+    
+    private ModelAndView listeTweetsByUserId (String uid){
+    	ModelAndView model = new ModelAndView();
     	if(currentUser.isDefined()){
+            model.setViewName("tweets");
+	        model.addObject("currentUser", currentUser.getValue());	        
+	        User user = this.userService.findOne(uid);
+	        List<Tweet> tweets = this.tweetService.findAllByUser(uid);
+	        model.addObject("user", user);
+	        model.addObject("tweets", tweets);
+    	}else{
+    		model.setViewName("error");
 	        model.addObject("currentUser", currentUser.getValue());
+        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");    		
     	}
-        List<Tweet> tweets = this.tweetService.findAllByUser(id);
-        User user = this.userService.findOne(id);
+    	return model;
+    }
+    
+    @RequestMapping( value = Route.searchUser, method = RequestMethod.GET)
+    public ModelAndView searchUser(
+            @RequestParam("userName") String userName
+    ){
+    	try{
+    		User u = this.userService.getUserByName(userName);
+            return listeTweetsByUserId(u.getId());
+    	}catch(UserNotFoundException une){
+            ModelAndView model = new ModelAndView();
+    		model.setViewName("error");
+	        model.addObject("currentUser", currentUser.getValue());
+        	model.addObject("message", "Utilisateur non trouvé");
+        	return model;
+    	}
         
-        model.addObject("user", user);
-        model.addObject("tweets", tweets);
-        return model;
     }
     
     /**

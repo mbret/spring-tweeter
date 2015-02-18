@@ -1,9 +1,12 @@
 package com.springapp.service;
 
+import java.util.List;
+
 import com.springapp.domain.exception.ActivationNotFoundException;
 import com.springapp.domain.exception.AuthenticationException;
 import com.springapp.domain.exception.UserExistException;
 import com.springapp.domain.exception.UserNotFoundException;
+import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 
 public interface UserService extends Service<User>{
@@ -19,6 +22,8 @@ public interface UserService extends Service<User>{
     public User getUserByMail(String mail) throws UserNotFoundException;
 
     public void unregisterAccount(User u);
+
+	public User getUserByName(String name) throws UserNotFoundException;
 
 //    public void addUser(User user) throws UserExistException;
 

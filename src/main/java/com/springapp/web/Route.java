@@ -13,6 +13,7 @@ public class Route {
     public static final String logout = "/loginController/logout";
     public static final String tweet = "/users/tweets/detail";
     public static final String tweets = "/users/tweets";
+    public static final String searchUser = "/users/searchUser";
     public static final String postTweet = "/tweets/post";
     public static final String subscriptions = "/subscriptions";
     public static final String register = "/register";
@@ -29,6 +30,7 @@ public class Route {
         routes.put("addUser", addUser.substring(1));
         routes.put("login", login.substring(1));
         routes.put("logout", logout.substring(1));
+        routes.put("searchUser", searchUser.substring(1));
     }
 
     public static HashMap<String, String> getRoutes()

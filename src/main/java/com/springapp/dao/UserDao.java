@@ -24,4 +24,6 @@ public interface UserDao extends Dao<User>{
 	@CacheEvict
 	public void deleteUser(String id);
 
+	public User getUserByName(String name);
+
 }

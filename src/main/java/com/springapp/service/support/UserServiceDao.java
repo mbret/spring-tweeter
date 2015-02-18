@@ -17,6 +17,7 @@ import com.springapp.domain.exception.ActivationNotFoundException;
 import com.springapp.domain.exception.AuthenticationException;
 import com.springapp.domain.exception.UserExistException;
 import com.springapp.domain.exception.UserNotFoundException;
+import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 import com.springapp.service.UserService;
 
@@ -119,6 +120,15 @@ public class UserServiceDao implements UserService {
         }
         catch(IncorrectResultSizeDataAccessException e) {
             throw new UserNotFoundException("User not found " + mail);
+        }
+    }
+
+    public User getUserByName(String name) throws UserNotFoundException {
+        try {
+            return userDao.getUserByName(name);
+        }
+        catch(IncorrectResultSizeDataAccessException e) {
+            throw new UserNotFoundException("User not found " + name);
         }
     }
 

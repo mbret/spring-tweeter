@@ -21,7 +21,8 @@ box-shadow: 1px 1px 12px #555;
 } 
 .menu{ 
 background:#444; 
-height:30px; 
+height:40px; 
+padding-top:5px;
 } 
 	
       .main .menu .button-group{ 
@@ -50,22 +51,47 @@ height:30px;
 	       }         
 	       .main .menu .button-group li:hover{ 
 	       background:#222; 
-	       }          
+	       }   
+	       
+	              
        .main .menu .button-indiv{ 
-       	 margin-left: 800px;
-       } 
-             
-	       .main .menu .button-indiv a{ 
+       	 margin-left: 500px;
+       }              
+	       .main .menu .button-indiv div{ 
 	       	 float:right;
 	       	 padding-right:12px;
-	       } 
-	        
+	       } 	        
 	       .main .menu .button-indiv p { 	       
 		       font-weight:bold; 
 		       color:white;
-		       float:right;
 		       margin-top:5px;
-	       } 
+	       }	        
+	       .main .menu .button-indiv img { 	       
+		       width:20px;
+		       height:20px;
+		       margin-top:3px;
+	       }
+		  .main .menu .button-indiv input {
+			    background: url("../images/loupeBl.png") no-repeat scroll 7px center rgba(0, 0, 0, 0);
+			    border: medium none;
+			    border-radius: 50px;
+			    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4) inset;
+			    color: #fff;
+			    height: 20px;
+			    outline: medium none;
+			    padding: 0 5px 0 23px;
+			    text-shadow: 0 1px 0 #2c2d2f;
+			    transition: all 0.5s ease 0s;
+			    width: 170px;
+			    float:right;
+			    margin-top:4px;
+			}
+			.main .menu .button-indiv input:focus {
+			    background: url("../images/loupeNo.png") no-repeat scroll 7px center #fff;
+			    color: #000;
+			    text-shadow: 0 1px 0 #fff;
+			    width: 250px;
+			} 
 	       
 .corps{
 	padding:10px;	
@@ -74,7 +100,56 @@ height:30px;
 .warning{
 	color:red;
 	font-weight:bold;
-}   
+}  
+
+.tweets{
+	
+}
+	.tweets .tweetDate{
+		float:right;
+		color:#818181;
+	} 
+	.tweets .tweetUser{
+		font-size:14px;		
+	    font-weight:bold; 
+	}
+	.tweets .unTweet{
+		margin:10px;
+	}	
+	.tweets hr{
+		border:none;
+		border-top:1px solid black;
+		margin-top:0px;
+	}	
+	.tweets .noTweets{
+		padding:10px;
+	}
+	.tweets .userDetails{
+		height:200px;
+		background-color:#ccc;
+		padding:10px;
+		text-align:center;
+	}		
+		.tweets .userDetails h1{
+			font-size:25px;
+			margin-top: 50px;
+		}
+		.tweets .userDetails table{
+			width:100%;
+  			border-collapse: collapse;
+  			height:50px;
+  			margin-top:70px;
+		}		
+			.tweets .userDetails td{
+				border: solid 1px black;
+				padding-left:10px;
+			}
+			
+footer{	
+	background:#444; 
+	color:white;
+	padding:10px;
+}	
 /*
 .main .content form .textarea, .main .content form .input{ 
 width:100%; 

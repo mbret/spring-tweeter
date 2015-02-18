@@ -14,8 +14,9 @@
 				</ul> 	
 		   	</div>
 		   	<div class="button-indiv">
-		   		<a href="${pageContext.request.contextPath}/loginController/logout.html"><p>[Se déconnecter]</p></a>
-		   		<a href="${pageContext.request.contextPath}/tweets/post"><img src="${pageContext.request.contextPath}/media/images/compose.png"/></a>
+		   		<div><a href="${pageContext.request.contextPath}/loginController/logout.html"><p>[Se déconnecter]</p></a></div>
+		   		<div><a href="${pageContext.request.contextPath}/tweets/post"><img src="${pageContext.request.contextPath}/media/images/compose.png"/></a></div>
+		   		<div><form method="get" action="${pageContext.request.contextPath}/users/searchUser"><input type="text" placeholder="Rechercher un utilisateur" id="search" name="userName" /></form></div>
 		   	</div>          
 		</div>
       </c:when>	
@@ -27,8 +28,8 @@
 				</ul> 	
 		   	</div>
 		   	<div class="button-indiv">
-		   		<a href="${pageContext.request.contextPath}/loginForm.html"><p>[Se Connecter]</p></a>
-		   		<a href="${pageContext.request.contextPath}/register.html"><p>[S'incrire]</p></a>   		
+		   		<div><a href="${pageContext.request.contextPath}/loginForm.html"><p>[Se Connecter]</p></a></div>
+		   		<div><a href="${pageContext.request.contextPath}/register.html"><p>[S'incrire]</p></a></div>   		
 		   	</div>          
 		</div>      
       </c:otherwise>

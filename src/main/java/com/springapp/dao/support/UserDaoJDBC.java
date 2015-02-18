@@ -27,6 +27,7 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	private static final String GET_USERS = "SELECT * FROM user";
 	private static final String GET_USER  = "SELECT * FROM user WHERE id = ?";
 	private static final String GET_USERM = "SELECT * FROM user WHERE mail = ?";
+	private static final String GET_USERN = "SELECT * FROM user WHERE name = ?";
 	private static final String ADD_USER  = "INSERT INTO user(id, mail, name, firstName, password) VALUES(?, ?, ?, ?, ?)";
 	private static final String UPD_USER  = "UPDATE user SET mail = ?, name = ?, firstname = ? WHERE id = ?";
 	private static final String DEL_USER  = "DELETE FROM user WHERE id = ?";
@@ -49,6 +50,10 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	
 	public User getUserByMail(String mail) {
 		return jdbcTemplate.queryForObject(GET_USERM, new UserMapper(), mail);
+	}
+
+	public User getUserByName(String name) {
+		return jdbcTemplate.queryForObject(GET_USERN, new UserMapper(), name);
 	}
     
 
@@ -95,5 +100,4 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 		}
 		
 	}
-
 }
