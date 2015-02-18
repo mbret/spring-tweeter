@@ -1,12 +1,15 @@
 package com.springapp.web.mvc.controller;
 
+import com.springapp.domain.ScopedValue;
 import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 import com.springapp.service.TweetService;
 import com.springapp.service.UserService;
 import com.springapp.web.Route;
 import com.springapp.web.validation.UserValidator;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,7 +24,14 @@ import java.util.List;
 public class TweetController {
 
     private TweetService tweetService;
-    private UserService userService;
+    private UserService userService;    
+    private ScopedValue<User> currentUser;
+    
+    @Autowired
+    @Qualifier("current-user")
+    public void setCurrentUser(ScopedValue<User> currentUser) {
+        this.currentUser = currentUser;
+    }
 
     @Autowired
     public void setUserService(UserService userService) {
@@ -38,6 +48,7 @@ public class TweetController {
      * Require user id as parameter.
      * @return
      */
+    
     @RequestMapping( value = Route.tweets, method = RequestMethod.GET)
     public ModelAndView tweets(
             @RequestParam("user") String id
@@ -45,6 +56,9 @@ public class TweetController {
         ModelAndView model = new ModelAndView();
         model.setViewName("tweets");
 
+    	if(currentUser.isDefined()){
+	        model.addObject("currentUser", currentUser.getValue());
+    	}
         List<Tweet> tweets = this.tweetService.findAllByUser(id);
         User user = this.userService.findOne(id);
         
@@ -52,7 +66,7 @@ public class TweetController {
         model.addObject("tweets", tweets);
         return model;
     }
-
+    
     /**
      * Display a tweet detail.
      * @param id
@@ -63,11 +77,17 @@ public class TweetController {
             @RequestParam("id") String id
     ){
         ModelAndView model = new ModelAndView();
-        model.setViewName("tweet-detail");
-
-        Tweet tweet = this.tweetService.findOne(id);
-
-        model.addObject("tweet", tweet);
+       
+    	if(currentUser.isDefined()){
+    		model.setViewName("tweet-detail");
+	        model.addObject("currentUser", currentUser.getValue());
+	        Tweet tweet = this.tweetService.findOne(id);
+	        model.addObject("tweet", tweet);
+    	}else{
+    		model.setViewName("error");
+	        model.addObject("currentUser", currentUser.getValue());
+        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");
+    	}
         return model;
     }
 
@@ -78,10 +98,17 @@ public class TweetController {
     @RequestMapping( value = Route.postTweet, method = RequestMethod.GET)
     public ModelAndView postTweet(){
         ModelAndView model = new ModelAndView();
-        model.setViewName("tweet-post");
-        
-        model.addObject("command", new Tweet());
-        model.addObject("route", Route.getRoutes());
+    	if(currentUser.isDefined()){
+	        model.addObject("currentUser", currentUser.getValue());
+	        model.setViewName("tweet-post");
+	        model.addObject("command", new Tweet());
+	        model.addObject("route", Route.getRoutes());
+    	}else{
+    		model.setViewName("error");
+	        model.addObject("currentUser", currentUser.getValue());
+        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");
+    	}
+    	
 
         return model;
     }
@@ -94,8 +121,8 @@ public class TweetController {
     public ModelAndView  postTweetProcess(
             @ModelAttribute Tweet tweet, Model model
     ){
-
-        tweet.setUserID("test");
+    	tweet.setUserID(currentUser.getValue().getId());
+    	tweet.setUser(currentUser.getValue());
         this.tweetService.create(tweet);
 
         return new ModelAndView("redirect:" + Route.tweet + "?id=" + tweet.getId().toString());

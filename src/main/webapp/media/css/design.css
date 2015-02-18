@@ -62,10 +62,19 @@ height:30px;
 	        
 	       .main .menu .button-indiv p { 	       
 		       font-weight:bold; 
-		       	color:white;
-		       	 float:right;
-		       	 margin-top:5px;
+		       color:white;
+		       float:right;
+		       margin-top:5px;
 	       } 
+	       
+.corps{
+	padding:10px;	
+}	 
+
+.warning{
+	color:red;
+	font-weight:bold;
+}   
 /*
 .main .content form .textarea, .main .content form .input{ 
 width:100%; 

@@ -19,7 +19,7 @@ import java.util.List;
 
 @Controller
 public class UserController {
-
+/*
     private UserService userService;
     private UserValidator userValidator;
 
@@ -65,7 +65,7 @@ public class UserController {
     /**
      * Display all users 
      * @return
-     */
+     
     @RequestMapping(value = Route.users, method = RequestMethod.GET)
     public ModelAndView users(){
         ModelAndView model = new ModelAndView();
@@ -77,5 +77,5 @@ public class UserController {
         model.addObject("users", users);
         return model;
     }
-
+*/
 }

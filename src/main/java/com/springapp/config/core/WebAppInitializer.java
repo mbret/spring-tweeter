@@ -45,8 +45,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
         mvcDispatcher.addMapping("/");
         mvcDispatcher.addMapping("*.html");
         mvcDispatcher.addMapping("*.ajax");
-        mvcDispatcher.addMapping("*.css");
-        mvcDispatcher.addMapping("*.png");
 
         // Enable Spring Data REST in the DispatcherServlet
 //        AnnotationConfigWebApplicationContext webCtx = new AnnotationConfigWebApplicationContext();

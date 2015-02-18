@@ -9,21 +9,9 @@
 <div class="main">	
 	<jsp:include page="../common/menu.jsp" /> 
 	<div class="corps">
-		<h2>Tweet ${tweet.id}</h2>
-			<table>
-			    <tr>
-			        <td>User</td>
-			        <td>${tweet.userID}</td>
-			    </tr>
-			    <tr>
-			        <td>Content</td>
-			        <td>${tweet.content}</td>
-			    </tr>
-			    <tr>
-			        <td>Date</td>
-			        <td>${tweet.date}</td>
-			    </tr>
-			</table>   		
+   		<c:if test="${not empty message}">
+   			<p class="warning">${message}</p>
+   		</c:if>       		
 	</div>
 	<jsp:include page="../common/footer.jsp" />  
 </div>

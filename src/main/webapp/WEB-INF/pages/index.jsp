@@ -13,18 +13,20 @@
 <jsp:include page="../common/head.jsp" />
 <body>
 	<div class="main">
-		<jsp:include page="../common/menuNotConnected.jsp" />
-		<div class="tweets" role="content">     
-			<article>     
-				<p>Tweet 2</p>
-			</article>
-			<hr/>
-			<article>
-				<p>Tweet 2</p>
-			</article>
-			<li><a href="${contextPath}/example.html">Example page</a></li>
-    		<li><a href="${contextPath}/users.html">See users</a></li>
-    		<li><a href="${contextPath}/${route.postTweet}">Post a tweet</a></li>
+		<jsp:include page="../common/menu.jsp" />
+		<div class="corps">
+			<div class="tweets" role="content">     
+				<article>     
+					<p>Tweet 2</p>
+				</article>
+				<hr/>
+				<article>
+					<p>Tweet 2</p>
+				</article>
+				<li><a href="${contextPath}/example.html">Example page</a></li>
+	    		<li><a href="${contextPath}/users.html">See users</a></li>
+	    		<li><a href="${contextPath}/${route.postTweet}">Post a tweet</a></li>
+			</div>
 		</div>
 		<jsp:include page="../common/footer.jsp" />  
 	</div>  

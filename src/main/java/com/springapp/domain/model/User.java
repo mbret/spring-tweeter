@@ -1,17 +1,13 @@
 package com.springapp.domain.model;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Collection;
 
 @Entity
 @Table(name = "user")
-public class User implements UserDetails{
+public class User{
 
     @Id
     @Column(name = "id", length = 36)
@@ -22,20 +18,28 @@ public class User implements UserDetails{
     
     @Column(name = "name")
     private String name;
-    
+
     @Column(name = "firstname")
     private String firstName;
+    
+    @Column(name = "password")
+    private String password;
 
     public User() {
     }
 
-    public User(String firstName, String name, String mail) {
+    public User(String firstName, String name, String mail, String password) {
         this.firstName = firstName;
         this.name = name;
         this.mail = mail;
+        this.password = password;
     }
 
-    public String getId() {
+    public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getId() {
         return id;
     }
 
@@ -71,11 +75,15 @@ public class User implements UserDetails{
         return true;
     }
 
+	public String getPassword() {
+		return password;
+	}
+    /*
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
     }
-
+    
     @Override
     public String getPassword() {
         return "";
@@ -105,4 +113,5 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return false;
     }
+    */
 }

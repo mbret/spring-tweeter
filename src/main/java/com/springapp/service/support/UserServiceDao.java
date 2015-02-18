@@ -3,14 +3,6 @@ package com.springapp.service.support;
 import java.util.List;
 import java.util.UUID;
 
-import com.springapp.dao.ActivationDao;
-import com.springapp.dao.PasswordDao;
-import com.springapp.dao.UserDao;
-import com.springapp.domain.exception.*;
-import com.springapp.domain.model.Activation;
-import com.springapp.domain.model.Password;
-import com.springapp.domain.model.User;
-import com.springapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -19,13 +11,21 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.springapp.dao.ActivationDao;
+import com.springapp.dao.UserDao;
+import com.springapp.domain.exception.ActivationNotFoundException;
+import com.springapp.domain.exception.AuthenticationException;
+import com.springapp.domain.exception.UserExistException;
+import com.springapp.domain.exception.UserNotFoundException;
+import com.springapp.domain.model.User;
+import com.springapp.service.UserService;
+
 @Service
 @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
 public class UserServiceDao implements UserService {
 
     private UserDao userDao;
     private ActivationDao activationDao;
-    private PasswordDao passwordDao;
 
     @Autowired
     public void setUserDao(UserDao userDao) {
@@ -35,11 +35,6 @@ public class UserServiceDao implements UserService {
     @Autowired
     public void setActivationDao(ActivationDao activationDao) {
         this.activationDao = activationDao;
-    }
-
-    @Autowired
-    public void setPasswordDao(PasswordDao passwordDao) {
-        this.passwordDao = passwordDao;
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
@@ -90,15 +85,6 @@ public class UserServiceDao implements UserService {
         }
     }
 
-    public void changePassword(Password password) {
-
-        // Cipher Password
-        // TODO
-
-        // Set Password
-        passwordDao.setPassword(password);
-    }
-
     public User authenticate(String mail, String password) throws AuthenticationException {
 
         // Cipher Password
@@ -107,7 +93,7 @@ public class UserServiceDao implements UserService {
         // Get User entry
         try {
             User u = userDao.getUserByMail(mail);
-            if(!passwordDao.getPassword(u.getId().toString()).equals(password)) {
+            if(!userDao.getUser(u.getId().toString()).getPassword().equals(password)) {
                 throw new AuthenticationException("Authentication failed " + mail);
             }
             return u;

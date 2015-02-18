@@ -1,12 +1,15 @@
 package com.springapp.web.mvc.controller;
 
+import com.springapp.domain.ScopedValue;
 import com.springapp.domain.exception.UserExistException;
 import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 import com.springapp.service.TweetService;
 import com.springapp.service.UserService;
 import com.springapp.web.Route;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +35,13 @@ public class IndexController {
 
     private UserService userService;
     private TweetService tweetService;
+    private ScopedValue<User> currentUser;
+    
+    @Autowired
+    @Qualifier("current-user")
+    public void setCurrentUser(ScopedValue<User> currentUser) {
+        this.currentUser = currentUser;
+    }
     
     @Autowired
     public void setUserService(UserService userService) {
@@ -53,12 +63,8 @@ public class IndexController {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Object myUser = (auth != null) ? auth.getPrincipal() :  null;
-
-        if (myUser instanceof User) {
-            User user = (User) myUser;
-            System.out.println(user);
+        if(currentUser.isDefined()){
+	        model.addObject("currentUser", currentUser.getValue());
         }
         
         model.addObject("route", Route.getRoutes());
@@ -75,7 +81,7 @@ public class IndexController {
         model.setViewName("example");
         
         // Add a user
-        User user = new User("Maxime", "Bret", "email.gmail.com");
+        User user = new User("Maxime", "Bret", "email.gmail.com", "psw");
         try {
             this.userService.registerAccount( user );
         } catch (UserExistException e) {

@@ -32,9 +32,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/META-INF/resources/webjars/").setCachePeriod(31556926);
+        registry.addResourceHandler("/media/**").addResourceLocations("/media/").setCachePeriod(31556926);
 //        registry.addResourceHandler("/css/**").addResourceLocations("/css/").setCachePeriod(31556926);
-//        registry.addResourceHandler("/img/**").addResourceLocations("/img/").setCachePeriod(31556926);
+//        registry.addResourceHandler("/images/**").addResourceLocations("/images/").setCachePeriod(31556926);
 //        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
     }
 

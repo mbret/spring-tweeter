@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AuthController {
-
+ /*
     @RequestMapping("/signup.html")
     public String signup() {
         return "hello";
@@ -92,5 +92,5 @@ public class AuthController {
         model.addAttribute("error", "true");
         return "login_page";
 
-    }
+    } */
 }

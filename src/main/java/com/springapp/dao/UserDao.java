@@ -3,6 +3,7 @@ package com.springapp.dao;
 import java.util.List;
 
 import com.springapp.domain.model.User;
+
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -22,4 +23,5 @@ public interface UserDao extends Dao<User>{
 
 	@CacheEvict
 	public void deleteUser(String id);
+
 }
