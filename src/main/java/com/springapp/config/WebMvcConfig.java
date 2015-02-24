@@ -3,6 +3,7 @@ package com.springapp.config;
 import com.springapp.domain.ScopedObject;
 import com.springapp.domain.ScopedValue;
 import com.springapp.domain.model.User;
+import com.springapp.web.mvc.inteceptor.HelloWorldInterceptor;
 import com.springapp.web.mvc.security.PrivateInterceptor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -38,6 +39,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 //        registry.addResourceHandler("/js/**").addResourceLocations("/js/").setCachePeriod(31556926);
     }
 
+    @Override
+    public void addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(helloWorldInterceptor())
+                .addPathPatterns("/*");
+
+    }
+    
     /**
      * InternalResourceViewResolver
      * @return
@@ -52,6 +60,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+    
+    
     /**
      * We define a scoped bean that stock an user into session.
      * @return
@@ -76,6 +86,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         resolver.setExceptionAttribute("ErrorOccurred"); // Default is "exception"
         resolver.setDefaultErrorView("../common/500"); // 500.jsp
         return resolver;
+    }
+    
+    @Bean
+    public HandlerInterceptor helloWorldInterceptor(){
+        return new HelloWorldInterceptor();
+        
     }
     
 //    @Bean

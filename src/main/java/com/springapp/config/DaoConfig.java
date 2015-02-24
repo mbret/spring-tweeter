@@ -58,7 +58,7 @@ public class DaoConfig {
         dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
         dataSource.setUrl(env.getProperty("jdbc.url"));
         dataSource.setUsername(env.getProperty("jdbc.user"));
-        dataSource.setPassword(env.getProperty("jdbc.password"));
+        dataSource.setPassword(env.getProperty("jdbc.pass"));
         
         // initialize db
         DataSourceInitializer dsInitializer= new DataSourceInitializer();
