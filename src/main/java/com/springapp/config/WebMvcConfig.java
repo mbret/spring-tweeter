@@ -3,14 +3,9 @@ package com.springapp.config;
 import com.springapp.domain.ScopedObject;
 import com.springapp.domain.ScopedValue;
 import com.springapp.domain.model.User;
-import com.springapp.web.mvc.inteceptor.HelloWorldInterceptor;
-import com.springapp.web.mvc.security.PrivateInterceptor;
+import com.springapp.web.rest.inteceptor.BasicAuthInterceptor;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -41,8 +36,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(helloWorldInterceptor())
-                .addPathPatterns("/*");
 
     }
     
@@ -59,8 +52,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         viewResolver.setSuffix(".jsp");
         return viewResolver;
     }
-
-    
     
     /**
      * We define a scoped bean that stock an user into session.
@@ -73,6 +64,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return new ScopedObject<>();
     }
 
+
+    
     /**
      * Set the 500 page when server exception is thrown.
      * @return
@@ -87,12 +80,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         resolver.setDefaultErrorView("../common/500"); // 500.jsp
         return resolver;
     }
-    
-    @Bean
-    public HandlerInterceptor helloWorldInterceptor(){
-        return new HelloWorldInterceptor();
-        
-    }
+
+
     
 //    @Bean
 //    public HandlerInterceptor privateInterceptor() {

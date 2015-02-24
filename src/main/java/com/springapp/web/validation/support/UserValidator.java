@@ -1,6 +1,7 @@
-package com.springapp.web.validation;
+package com.springapp.web.validation.support;
 
 import com.springapp.domain.model.User;
+import com.springapp.web.validation.Validator;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 

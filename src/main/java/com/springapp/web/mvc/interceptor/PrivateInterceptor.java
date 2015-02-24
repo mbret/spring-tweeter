@@ -1,4 +1,4 @@
-package com.springapp.web.mvc.security;
+package com.springapp.web.mvc.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

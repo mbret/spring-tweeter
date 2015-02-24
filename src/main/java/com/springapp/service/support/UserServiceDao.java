@@ -100,6 +100,7 @@ public class UserServiceDao implements UserService {
             return u;
         }
         catch(IncorrectResultSizeDataAccessException e) {
+            e.printStackTrace();
             throw new AuthenticationException("Authentication failed " + mail);
         }
 

@@ -17,7 +17,8 @@ import com.springapp.web.Route;
 
 @Controller
 public class loginController {
-private UserService userService;
+    
+    private UserService userService;
     
     @Autowired
     public void setUserService(UserService userService) {

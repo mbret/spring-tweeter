@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 import javax.xml.crypto.Data;
 
 /**
- * The @EnableWebSecurity annotation and WebSecurityConfigurerAdapter work together to provide web based security. 
+ * The @EnableWebSecurity annotation and WebSecurityConfigurerAdapter work together to provide web based interceptor.
  * By extending WebSecurityConfigurerAdapter and only a few lines of code we are able to do the following:
  * - Require the user to be authenticated prior to accessing any URL within our application
  * - Create a user with the username “user”, password “password”, and role of “ROLE_USER”
@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private DataSource dataSource;
     
     /**
-     * Handle global security configuration
+     * Handle global interceptor configuration
      * @param auth
      * @throws Exception
      */
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Handle the HTTP security configuration.
+     * Handle the HTTP interceptor configuration.
      * Define what is accessible over HTTP.
      * @param http
      * @throws Exception

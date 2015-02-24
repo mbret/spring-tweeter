@@ -39,7 +39,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         // Setup the MVC Servlet Context through DispatcherServlet
         AnnotationConfigWebApplicationContext mvcContext = new AnnotationConfigWebApplicationContext();
-        mvcContext.register(WebMvcConfig.class);
+        mvcContext.register(
+                WebMvcConfig.class,
+                WebRestConfig.class
+        );
         ServletRegistration.Dynamic mvcDispatcher = servletContext.addServlet("mvcServlet", new DispatcherServlet(mvcContext));
         mvcDispatcher.setLoadOnStartup(1);
         mvcDispatcher.addMapping("/");

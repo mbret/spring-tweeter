@@ -4,8 +4,8 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
 
 /**
  * No customizations of {@link AbstractSecurityWebApplicationInitializer} are necessary.
- * http://spring.io/blog/2013/07/03/spring-security-java-config-preview-web-security/
- * http://www.mkyong.com/spring-security/spring-security-hello-world-annotation-example/
+ * http://spring.io/blog/2013/07/03/spring-interceptor-java-config-preview-web-interceptor/
+ * http://www.mkyong.com/spring-interceptor/spring-interceptor-hello-world-annotation-example/
  */
 public class WebAppSecurityInitializer extends AbstractSecurityWebApplicationInitializer {
     //do nothing

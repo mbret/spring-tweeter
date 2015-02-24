@@ -11,7 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 
 /**
-* Configuration of the business, persistence and security layers.
+* Configuration of the business, persistence and interceptor layers.
 */
 @Configuration
 @Import(value = {
@@ -22,6 +22,7 @@ import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguratio
         DaoConfig.class,
         WebMvcConfig.class,
         SecurityConfig.class,
+        WebRestConfig.class
 } )
 public class MainConfig {
 

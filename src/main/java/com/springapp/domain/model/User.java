@@ -1,9 +1,7 @@
 package com.springapp.domain.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -25,6 +23,13 @@ public class User{
     @Column(name = "password")
     private String password;
 
+    @ManyToMany(cascade = CascadeType.MERGE)
+//    @JoinTable(
+//            name = "subscription",
+//            joinColumns =
+//    )
+    private List<User> subscriptions;
+    
     public User() {
     }
 

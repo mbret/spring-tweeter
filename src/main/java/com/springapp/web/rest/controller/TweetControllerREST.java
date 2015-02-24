@@ -1,14 +1,14 @@
-package com.springapp.web.mvc.controller.api;
+package com.springapp.web.rest.controller;
 
 import com.springapp.service.TweetService;
 import com.springapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/api/tweets")
-public class APITweetController {
+public class TweetControllerREST {
 
     private TweetService tweetService;
     private UserService userService;
