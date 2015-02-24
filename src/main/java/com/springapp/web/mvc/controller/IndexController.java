@@ -31,7 +31,7 @@ import java.util.List;
  * Use ResponseEntity<T> to return the HTTP response with your custom status or headers.
  */
 @Controller
-public class IndexController {
+public class IndexController extends SuperController{
 
     private UserService userService;
     private TweetService tweetService;
@@ -59,7 +59,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = { "/", "/index", "/index.html" }, method = RequestMethod.GET)
-    public ModelAndView showIndex() {
+    public ModelAndView showIndex(@ModelAttribute("something") String doStuff) {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
 
