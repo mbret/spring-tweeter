@@ -31,7 +31,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         // Setup the main Spring Application Context through ContextLoaderListener
         AnnotationConfigWebApplicationContext rootCtx  = new AnnotationConfigWebApplicationContext();
         rootCtx .register(
-                SecurityConfig.class,
+//                SecurityConfig.class,
                 DaoConfig.class,
                 ServiceConfig.class
         );
@@ -57,22 +57,3 @@ public class WebAppInitializer implements WebApplicationInitializer {
 //        reg.addMapping("/*");
     }
 }
-
-//public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-//
-//    @Override
-//    protected Class<?>[] getRootConfigClasses() {
-//        return new Class[] { SecurityConfig.class, DaoConfig.class, ServiceConfig.class };
-//    }
-//
-//    @Override
-//    protected Class<?>[] getServletConfigClasses() {
-//        return new Class[] { WebMvcConfig.class };
-//    }
-//
-//    @Override
-//    protected String[] getServletMappings() {
-//        return new String[] { "*.html", "*.ajax" };
-//    }
-//
-//}

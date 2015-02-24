@@ -10,7 +10,7 @@
 	<jsp:include page="../common/menu.jsp" /> 
 	<div class="corps">
 		<h1>Ajouter un tweet</h1>
-   		<form:form method="POST" action="${contextPath}/${route.postTweet}">
+   		<form:form method="POST" action="${contextPath}/${routes.postTweet}">
 		    <table>
 		        <tr>
 		            <td><form:label path="content">Content</form:label></td>

@@ -62,12 +62,7 @@ public class IndexController extends SuperController{
     public ModelAndView showIndex(@ModelAttribute("something") String doStuff) {
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
-
-        if(currentUser.isDefined()){
-	        model.addObject("currentUser", currentUser.getValue());
-        }
-        
-        model.addObject("route", Route.getRoutes());
+        model.addObject("currentUser", currentUser.getValue());
         return model;
     }
 

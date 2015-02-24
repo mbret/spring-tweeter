@@ -9,7 +9,7 @@
 <div class="main">
 	<jsp:include page="../common/menu.jsp" />
 	<div class="corps">
-       <form:form method="POST" action="${contextPath}/${route.addUser}">
+       <form:form method="POST" action="${contextPath}/${routes.addUser}">
 		    <table>
 			    <tr>
 			        <td><label for="mail">Adresse électronique :</label></td>

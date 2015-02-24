@@ -49,7 +49,6 @@ public class RegisterController {
 	        model.setViewName("register");
 	        
 	        model.addObject("command", new User());
-	        model.addObject("route", Route.getRoutes());
     	}
         return model;
     }
@@ -71,7 +70,7 @@ public class RegisterController {
 			e.printStackTrace();
 		}
 
-        return new ModelAndView("redirect:" + Route.loginForm);
+        return new ModelAndView("redirect:" + Route.login);
 
     }
 }

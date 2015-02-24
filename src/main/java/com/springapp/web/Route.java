@@ -8,9 +8,8 @@ public class Route {
 
     public static final String host = "/";
     public static final String home = "/index";
-    public static final String loginForm = "/loginForm";
-    public static final String login = "/loginController/login";
-    public static final String logout = "/loginController/logout";
+    public static final String login = "/login";
+    public static final String logout = "/logout";
     public static final String tweet = "/users/tweets/detail";
     public static final String tweets = "/users/tweets";
     public static final String searchUser = "/users/searchUser";
@@ -21,6 +20,7 @@ public class Route {
     public static final String subscribe = "/subscriptions/subscribe";
     public static final String unsubscribe = "/subscriptions/unsubscribe";
     public static final String users = "/users";
+    public static final String profile = "/profile";
 
     // Used in views
     // substring remove the first /
@@ -30,7 +30,10 @@ public class Route {
         routes.put("addUser", addUser.substring(1));
         routes.put("login", login.substring(1));
         routes.put("logout", logout.substring(1));
+        routes.put("register", register.substring(1));
         routes.put("searchUser", searchUser.substring(1));
+        routes.put("profile", profile.substring(1));
+        routes.put("tweets", tweets.substring(1));
     }
 
     public static HashMap<String, String> getRoutes()

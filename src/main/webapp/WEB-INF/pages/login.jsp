@@ -9,7 +9,7 @@
 <div class="main">
 	<jsp:include page="../common/menu.jsp" />
 	<div class="corps">
-       <form:form method="POST" action="${contextPath}/${route.login}">
+       <form:form method="POST" action="${contextPath}/${routes.login}">
        		<c:if test="${not empty message}">
        			<p class="warning">${message}</p>
        		</c:if>

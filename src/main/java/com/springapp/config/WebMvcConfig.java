@@ -3,6 +3,8 @@ package com.springapp.config;
 import com.springapp.domain.ScopedObject;
 import com.springapp.domain.ScopedValue;
 import com.springapp.domain.model.User;
+import com.springapp.web.mvc.interceptor.PrivateInterceptor;
+import com.springapp.web.mvc.interceptor.ViewConfigInjectorInterceptor;
 import com.springapp.web.rest.inteceptor.BasicAuthInterceptor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
@@ -36,7 +38,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-
+        registry.addInterceptor(viewConfigInterceptor())
+                .addPathPatterns("/**");
+        registry.addInterceptor(privateInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/api/**")
+                .excludePathPatterns("/login")
+                .excludePathPatterns("/register");
     }
     
     /**
@@ -81,14 +89,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-
     
-//    @Bean
-//    public HandlerInterceptor privateInterceptor() {
-//        return new PrivateInterceptor();
-//    }
-//
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(privateInterceptor()).addPathPatterns("/private/**");
-//    }
+    @Bean
+    public HandlerInterceptor privateInterceptor() {
+        return new PrivateInterceptor();
+    }
+
+    @Bean
+    public HandlerInterceptor viewConfigInterceptor(){
+        return new ViewConfigInjectorInterceptor();
+        
+    }
 }

@@ -58,18 +58,12 @@ public class TweetController {
     
     private ModelAndView listeTweetsByUserId (String uid){
     	ModelAndView model = new ModelAndView();
-    	if(currentUser.isDefined()){
-            model.setViewName("tweets");
-	        model.addObject("currentUser", currentUser.getValue());	        
-	        User user = this.userService.findOne(uid);
-	        List<Tweet> tweets = this.tweetService.findAllByUser(uid);
-	        model.addObject("user", user);
-	        model.addObject("tweets", tweets);
-    	}else{
-    		model.setViewName("error");
-	        model.addObject("currentUser", currentUser.getValue());
-        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");    		
-    	}
+        model.setViewName("tweets");
+        model.addObject("currentUser", currentUser.getValue());
+        User user = this.userService.findOne(uid);
+        List<Tweet> tweets = this.tweetService.findAllByUser(uid);
+        model.addObject("user", user);
+        model.addObject("tweets", tweets);
     	return model;
     }
     
@@ -100,17 +94,10 @@ public class TweetController {
             @RequestParam("id") String id
     ){
         ModelAndView model = new ModelAndView();
-       
-    	if(currentUser.isDefined()){
-    		model.setViewName("tweet-detail");
-	        model.addObject("currentUser", currentUser.getValue());
-	        Tweet tweet = this.tweetService.findOne(id);
-	        model.addObject("tweet", tweet);
-    	}else{
-    		model.setViewName("error");
-	        model.addObject("currentUser", currentUser.getValue());
-        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");
-    	}
+        model.setViewName("tweet-detail");
+        model.addObject("currentUser", currentUser.getValue());
+        Tweet tweet = this.tweetService.findOne(id);
+        model.addObject("tweet", tweet);
         return model;
     }
 
@@ -121,18 +108,9 @@ public class TweetController {
     @RequestMapping( value = Route.postTweet, method = RequestMethod.GET)
     public ModelAndView postTweet(){
         ModelAndView model = new ModelAndView();
-    	if(currentUser.isDefined()){
-	        model.addObject("currentUser", currentUser.getValue());
-	        model.setViewName("tweet-post");
-	        model.addObject("command", new Tweet());
-	        model.addObject("route", Route.getRoutes());
-    	}else{
-    		model.setViewName("error");
-	        model.addObject("currentUser", currentUser.getValue());
-        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");
-    	}
-    	
-
+        model.addObject("currentUser", currentUser.getValue());
+        model.setViewName("tweet-post");
+        model.addObject("command", new Tweet());
         return model;
     }
     

@@ -25,7 +25,7 @@
 				</article>
 				<li><a href="${contextPath}/example.html">Example page</a></li>
 	    		<li><a href="${contextPath}/users.html">See users</a></li>
-	    		<li><a href="${contextPath}/${route.postTweet}">Post a tweet</a></li>
+	    		<li><a href="${contextPath}/${routes.postTweet}">Post a tweet</a></li>
 			</div>
 		</div>
 		<jsp:include page="../common/footer.jsp" />  

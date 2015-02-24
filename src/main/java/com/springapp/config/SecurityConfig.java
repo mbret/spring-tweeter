@@ -44,12 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        // to customize with your own authentication provider
-        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
-//        auth.jdbcAuthentication()
-//                .dataSource(dataSource)
-//                .withDefaultSchema()
-//                .withUser("user").password("password").roles("USER");
+//        to customize with your own authentication provider
+//        auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .withDefaultSchema()
+                .withUser("user").password("password").roles("USER");
     }
 
     @Override
@@ -65,30 +65,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * @param http
      * @throws Exception
      */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                    .anyRequest().permitAll()
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests()
+//                    .anyRequest().permitAll()
 //                    .antMatchers("/index", "/register").permitAll()
 //                    .antMatchers("/**").hasRole("USER")
 //                    .anyRequest().authenticated() // 7
-                    .and()
+//                    .and()
 //                .httpBasic()
 //                    .and()
-                .formLogin()
+//                .formLogin()
 //                    .loginPage(Route.login)
 //                    .failureUrl("/login?error")
 //                    .usernameParameter("username")
 //                    .passwordParameter("password")
 //                    .permitAll()
-                    .and()
-                .logout().logoutSuccessUrl("/login?logout")
-                    .and()
-                .csrf()
-                    .and()
-                .exceptionHandling().accessDeniedPage("/403");
-    }
+//                    .and()
+//                .logout().logoutSuccessUrl("/login?logout")
+//                    .and()
+//                .csrf()
+//                    .and()
+//                .exceptionHandling().accessDeniedPage("/403");
+//    }
 
 
     /**

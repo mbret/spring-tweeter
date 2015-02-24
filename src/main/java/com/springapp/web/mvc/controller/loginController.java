@@ -37,30 +37,14 @@ public class loginController {
      * form for user login
      * @return
      */
-    @RequestMapping(value = Route.loginForm)
+    @RequestMapping(value = Route.login)
     public ModelAndView loginForm(){
-        return loginForm(null);
-    }
-    
-    private ModelAndView loginForm(String message){
         ModelAndView model = new ModelAndView();
-        if(currentUser.isDefined()){
-	        model.setViewName("error");
-	        model.addObject("currentUser", currentUser.getValue());
-        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");
-        }else{
-	        model.setViewName("login");
-	        if(message!=null){
-	        	model.addObject("message", message);
-	        }
-	        model.addObject("command", new User());
-	        model.addObject("route", Route.getRoutes());
-        }
+        model.setViewName("login");
+        model.addObject("command", new User());
         return model;
     }
-    
-    
-    
+
     /**
      * user login
      * @return
@@ -70,22 +54,20 @@ public class loginController {
             @ModelAttribute User user, Model model
     ){
         ModelAndView mod = new ModelAndView();
-        if(currentUser.isDefined()){
-	        mod.setViewName("error");
-	        mod.addObject("currentUser", currentUser.getValue());
-        	mod.addObject("message", "Vous ne pouvez pas acceder à cette page.");
-        	return mod;
-        }else{
-	        try {
-				User u = this.userService.authenticate(user.getMail(), user.getPassword());	
-				currentUser.setValue(u);
-		        return new ModelAndView("redirect:" + Route.host);
-			} catch (AuthenticationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				String message = "Login ou mot de passe incorrect."; 
-				return this.loginForm(message);
-			}
+        try {
+            User u = this.userService.authenticate(user.getMail(), user.getPassword());
+            currentUser.setValue(u);
+            return new ModelAndView("redirect:" + Route.host);
+        } catch (AuthenticationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            String message = "Login ou mot de passe incorrect.";
+            mod.setViewName("login");
+            if(message!=null){
+                mod.addObject("message", message);
+            }
+            mod.addObject("command", new User());
+            return mod;
         }
     }
     
@@ -99,15 +81,8 @@ public class loginController {
             @ModelAttribute User user, Model model
     ){
     	ModelAndView mod = new ModelAndView();
-        if(!currentUser.isDefined()){
-	        mod.setViewName("error");
-	        mod.addObject("currentUser", currentUser.getValue());
-        	mod.addObject("message", "Vous ne pouvez pas acceder à cette page.");
-        	return mod;
-        }else{
-	    	currentUser.setValue(null);
-	        return new ModelAndView("redirect:" + Route.host);
-        }
+        currentUser.setValue(null);
+        return new ModelAndView("redirect:" + Route.host);
     }
 
 }
