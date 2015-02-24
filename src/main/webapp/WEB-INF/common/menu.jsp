@@ -7,7 +7,7 @@
 		<div class="menu">
 			<div class="button-group">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/" class="button">Votre fil</a></li>
+					<li><a href="${pageContext.request.contextPath}/${routes.tweets}" class="button">Votre fil</a></li>
 					<li><a href="${pageContext.request.contextPath}/${routes.tweets}?user=${currentUser.id}" class="button">Mes tweets</a></li>
 					<li><a href="#" class="button">Hashtags</a></li>
 					<li><a href="${pageContext.request.contextPath}/${routes.profile}" class="button">Profil</a></li>

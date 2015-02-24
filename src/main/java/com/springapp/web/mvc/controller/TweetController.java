@@ -51,20 +51,27 @@ public class TweetController {
     
     @RequestMapping( value = Route.tweets, method = RequestMethod.GET)
     public ModelAndView tweets(
-            @RequestParam("user") String id
+            @RequestParam( value = "user", required = false ) String uid
     ){
-        return listeTweetsByUserId(id);
-    }
-    
-    private ModelAndView listeTweetsByUserId (String uid){
-    	ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView();
         model.setViewName("tweets");
-        model.addObject("currentUser", currentUser.getValue());
-        User user = this.userService.findOne(uid);
-        List<Tweet> tweets = this.tweetService.findAllByUser(uid);
-        model.addObject("user", user);
+        List<Tweet> tweets;
+        
+        // Want specific user tweets
+        if( uid != null ){
+            User user = this.userService.findOne(uid);
+            model.addObject("userTarget", user);
+            tweets = this.tweetService.findAllByUser(uid);
+        }
+        // Want our tweets with subscriptions
+        else{
+            final boolean withSubscription = true;
+            tweets = this.tweetService.findAllByUser(this.currentUser.getValue().getId(), withSubscription);
+            model.addObject("userTarget", this.currentUser.getValue());
+        }
+
         model.addObject("tweets", tweets);
-    	return model;
+        return model;
     }
     
     @RequestMapping( value = Route.searchUser, method = RequestMethod.GET)
@@ -73,7 +80,14 @@ public class TweetController {
     ){
     	try{
     		User u = this.userService.getUserByName(userName);
-            return listeTweetsByUserId(u.getId());
+            ModelAndView model = new ModelAndView();
+            model.setViewName("tweets");
+            model.addObject("currentUser", currentUser.getValue());
+            User user = this.userService.findOne(u.getId());
+            List<Tweet> tweets = this.tweetService.findAllByUser(u.getId());
+            model.addObject("user", user);
+            model.addObject("tweets", tweets);
+            return model;
     	}catch(UserNotFoundException une){
             ModelAndView model = new ModelAndView();
     		model.setViewName("error");

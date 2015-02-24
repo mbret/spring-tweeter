@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -73,7 +74,12 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 
     @Override
     public User findOne(Object id) {
-        return this.jdbcTemplate.queryForObject(GET_USER, new UserMapper(), id);
+        try{
+            return this.jdbcTemplate.queryForObject(GET_USER, new UserMapper(), id);
+        }
+        catch(EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     /**

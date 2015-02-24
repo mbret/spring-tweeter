@@ -28,6 +28,11 @@ public class TweetServiceDao implements TweetService {
     }
 
     @Override
+    public List<Tweet> findAllByUser(Object id, boolean withSubscription) {
+        return this.tweetDao.findAllByUser( id, withSubscription );
+    }
+
+    @Override
     public Tweet findOne(Object id) {
         return this.tweetDao.findOne(id);
     }

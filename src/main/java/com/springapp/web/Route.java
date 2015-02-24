@@ -1,26 +1,30 @@
 package com.springapp.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+
 import java.util.HashMap;
 
 public class Route {
-
+    
     private static HashMap<String, String> routes;
 
-    public static final String host = "/";
-    public static final String home = "/index";
-    public static final String login = "/login";
-    public static final String logout = "/logout";
-    public static final String tweet = "/users/tweets/detail";
-    public static final String tweets = "/users/tweets";
-    public static final String searchUser = "/users/searchUser";
-    public static final String postTweet = "/tweets/post";
-    public static final String subscriptions = "/subscriptions";
-    public static final String register = "/register";
-    public static final String addUser = "/register/addUser";
-    public static final String subscribe = "/subscriptions/subscribe";
-    public static final String unsubscribe = "/subscriptions/unsubscribe";
-    public static final String users = "/users";
-    public static final String profile = "/profile";
+    public static final String context = "";
+    public static final String host = context + "/";
+    public static final String home = context + "/index";
+    public static final String login = context + "/login";
+    public static final String logout = context + "/logout";
+    public static final String tweet = context + "/users/tweets/detail";
+    public static final String tweets = context + "/users/tweets";
+    public static final String searchUser = context + "/users/searchUser";
+    public static final String postTweet = context + "/tweets/post";
+    public static final String subscriptions = context + "/subscriptions";
+    public static final String register = context + "/register";
+    public static final String addUser = context + "/register/addUser";
+    public static final String subscribe = context + "/subscriptions/subscribe";
+    public static final String unsubscribe = context + "/subscriptions/unsubscribe";
+    public static final String users = context + "/users";
+    public static final String profile = context + "/profile";
 
     // Used in views
     // substring remove the first /

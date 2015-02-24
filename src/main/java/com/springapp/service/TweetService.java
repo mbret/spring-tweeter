@@ -13,5 +13,6 @@ public interface TweetService extends Service<Tweet>{
 
     public abstract List<Tweet> findAllByUser(Object id);
     
-//    public abstract  List<>
+    public abstract  List<Tweet> findAllByUser(Object id, boolean withSubscription);
+    
 }

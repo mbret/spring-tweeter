@@ -68,6 +68,12 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
         return list;
     }
 
+    @Override
+    public List<Tweet> findAllByUser(Object id, boolean withSubscriptions) {
+        List list = this.jdbcTemplate.query(GET_TWEETS_BY_USER, new TweetMapper(), id);
+        return list;
+    }
+
     private class TweetMapper implements RowMapper<Tweet> {
         
         @Override

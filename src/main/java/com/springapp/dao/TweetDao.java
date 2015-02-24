@@ -9,5 +9,7 @@ import java.util.List;
 public interface TweetDao extends Dao<Tweet> {
     
     public List<Tweet> findAllByUser(Object id);
+    
+    public List<Tweet> findAllByUser(Object id, boolean withSubscriptions);
 
 }
