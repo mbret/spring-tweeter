@@ -3,9 +3,10 @@ package com.springapp.config;
 import com.springapp.domain.ScopedObject;
 import com.springapp.domain.ScopedValue;
 import com.springapp.domain.model.User;
-import com.springapp.web.mvc.interceptor.PrivateInterceptor;
+import com.springapp.web.Route;
+import com.springapp.web.mvc.interceptor.ShouldBeLoggedInterceptor;
+import com.springapp.web.mvc.interceptor.ShouldNotBeLoggedInterceptor;
 import com.springapp.web.mvc.interceptor.ViewConfigInjectorInterceptor;
-import com.springapp.web.rest.inteceptor.BasicAuthInterceptor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.*;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -40,11 +41,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry){
         registry.addInterceptor(viewConfigInterceptor())
                 .addPathPatterns("/**");
-        registry.addInterceptor(privateInterceptor())
+        registry.addInterceptor(shouldBeLoggedInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/api/**")
-                .excludePathPatterns("/login")
-                .excludePathPatterns("/register");
+                .excludePathPatterns(Route.login)
+                .excludePathPatterns(Route.register);
+        registry.addInterceptor(shouldNotBeLoggedInterceptor())
+                .addPathPatterns(Route.login)
+                .addPathPatterns(Route.register);
     }
     
     /**
@@ -91,8 +95,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     
     @Bean
-    public HandlerInterceptor privateInterceptor() {
-        return new PrivateInterceptor();
+    public HandlerInterceptor shouldBeLoggedInterceptor() {
+        return new ShouldBeLoggedInterceptor();
+    }
+    
+    @Bean
+    public HandlerInterceptor shouldNotBeLoggedInterceptor() {
+        return new ShouldNotBeLoggedInterceptor();
     }
 
     @Bean

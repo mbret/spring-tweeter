@@ -1,16 +1,18 @@
 package com.springapp.web.mvc.interceptor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.springapp.domain.ScopedValue;
+import com.springapp.domain.exception.ForbiddenException;
+import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 import com.springapp.web.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-public class ShouldNoBeLoggedInterceptor extends HandlerInterceptorAdapter {
+public class ShouldBeLoggedInterceptor extends HandlerInterceptorAdapter {
 
     private ScopedValue<User> currentUser;
 
