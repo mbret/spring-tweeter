@@ -9,17 +9,19 @@
 <div class="main">
 	<jsp:include page="../common/menu.jsp" />
 	<div class="corps">
-       <form:form method="POST" action="${contextPath}/${routes.addUser}">
-		    <table>
+       <form:form method="POST" modelAttribute="register">
+		    
+           ${registerError}
+            <table>
 			    <tr>
-			        <td><label for="mail">Adresse électronique :</label></td>
-			        <td><form:input path="mail" /></td>
-			        <td><form:errors path="mail" /></td>
+			        <td><label for="email">Adresse électronique :</label></td>
+			        <td><form:input path="email" /></td>
+			        <td><form:errors path="email" /></td>
 			    </tr>
 			    <tr>
 			        <td><label for="name">Nom :</label></td>
-			        <td><form:input path="name" /></td>
-			        <td><form:errors path="name" /></td>
+			        <td><form:input id="name" path="lastName" /></td>
+			        <td><form:errors path="lastName" /></td>
 			    </tr>
 			    <tr>
 			        <td><label for="firstName">Prénom :</label></td>

@@ -20,7 +20,6 @@ public class Route {
     public static final String postTweet = context + "/tweets/post";
     public static final String subscriptions = context + "/subscriptions";
     public static final String register = context + "/register";
-    public static final String addUser = context + "/register/addUser";
     public static final String subscribe = context + "/subscriptions/subscribe";
     public static final String unsubscribe = context + "/subscriptions/unsubscribe";
     public static final String users = context + "/users";
@@ -31,7 +30,6 @@ public class Route {
     static {
         routes = new HashMap<String, String>();
         routes.put("postTweet", postTweet.substring(1));
-        routes.put("addUser", addUser.substring(1));
         routes.put("login", login.substring(1));
         routes.put("logout", logout.substring(1));
         routes.put("register", register.substring(1));

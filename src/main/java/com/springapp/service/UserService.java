@@ -11,7 +11,7 @@ import com.springapp.domain.model.User;
 
 public interface UserService extends Service<User>{
 
-    public void registerAccount(User u) throws UserExistException;
+    public User registerAccount(User u) throws UserExistException;
 
     public User activateAccount(String activationKey) throws ActivationNotFoundException;
 

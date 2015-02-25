@@ -1,9 +1,12 @@
 package com.springapp.web.mvc.controller;
 
+import com.springapp.domain.model.Register;
+import org.omg.PortableServer.REQUEST_PROCESSING_POLICY_ID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +17,8 @@ import com.springapp.domain.exception.UserExistException;
 import com.springapp.domain.model.User;
 import com.springapp.service.UserService;
 import com.springapp.web.Route;
+
+import javax.validation.Valid;
 
 @Controller
 public class RegisterController {
@@ -38,39 +43,46 @@ public class RegisterController {
      * controller for user registration
      * @return
      */
-    @RequestMapping(value = Route.register)
-    public ModelAndView register(){
+    @RequestMapping(value = Route.register, method = RequestMethod.GET)
+    public ModelAndView register(
+            Register register
+    ){
         ModelAndView model = new ModelAndView();
-    	if(currentUser.isDefined()){
-	        model.setViewName("error");
-	        model.addObject("currentUser", currentUser.getValue());
-        	model.addObject("message", "Vous ne pouvez pas acceder à cette page.");
-    	}else{
-	        model.setViewName("register");
-	        
-	        model.addObject("command", new User());
-    	}
+        model.setViewName("register");
         return model;
     }
-    
-    
+
     /**
      * Display new tweet form
      * @return
      */
-    @RequestMapping( value = Route.addUser, method = RequestMethod.POST)
+    @RequestMapping( value = Route.register, method = RequestMethod.POST)
     public ModelAndView addUser(
-            @ModelAttribute User user, Model model
+            @Valid Register register,
+            BindingResult bindingResult,
+            Model m
     ){
 
-        try {
-			this.userService.registerAccount(user);
-		} catch (UserExistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        ModelAndView model = new ModelAndView();
+        model.setViewName("register");
+        
+        if(bindingResult.hasErrors()){
+            
+        }
+        else{
+            try {
+                User user = new User(register.getFirstName(), register.getLastName(), register.getEmail(), register.getPassword());
+                user = this.userService.registerAccount(user);
+                this.currentUser.setValue(user);
+                return new ModelAndView("redirect:" + Route.home);
+                
+            } catch (UserExistException e) {
+//                e.printStackTrace();
+                model.addObject("registerError", "This email is already taken!");
+            }
+        }
 
-        return new ModelAndView("redirect:" + Route.login);
-
+        return model;
+        
     }
 }
