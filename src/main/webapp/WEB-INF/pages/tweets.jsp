@@ -11,7 +11,7 @@
 	<jsp:include page="../common/menu.jsp" /> 
 	<div class="tweets">
 
-	    <c:if test="${USER.id != userTarget.id}">
+	    <c:if test="${currentUser.id != userTarget.id}">
 		    <div class="userDetails">
 		    	<h1><c:out value="${userTarget.name}"/></h1>
 		    	<table>
@@ -19,8 +19,14 @@
 		    			<td>Nombre de tweets : ${fn:length(tweets)}</td>
 		    			<td>Nombre d'abonnés</td>
 		    			<td>Nombre d'abonnement</td>
-		    			<td><a href="${contextPath}/subscriptions/subscribe?user=${userTarget.id}" title="Subscribe to this user">S'abonner</a></td>
-		    			<!-- <td><a href="${contextPath}/subscriptions/unsubscribe?user=${userTarget.id}" title="Subscribe to this user">Unsubscribe</a></td>  -->
+		    			<c:if test="${currentUser.id != userTarget.id}">		    			
+		    				<c:if test="${isFollowing != true}">
+		    					<td><a href="${contextPath}/${routes.subscribe}?followed=${userTarget.id}&follower=${currentUser.id}" title="Subscribe to this user">S'abonner</a></td>
+		    				</c:if>		    			
+		    				<c:if test="${isFollowing == true}">
+		    					<td><a href="${contextPath}/${routes.unsubscribe}?followed=${userTarget.id}&follower=${currentUser.id}" title="Subscribe to this user">Unsubscribe</a></td>
+		    				</c:if>
+					   	</c:if>	
 		    		</tr>
 		    	</table>
 		    </div>
@@ -28,10 +34,10 @@
         
    		<c:if test="${fn:length(tweets) == 0}">
    			<div class="noTweets">
-	   			<c:if test="${USER.id != userTarget.id}">
+	   			<c:if test="${currentUser.id != userTarget.id}">
 			   		<p>Cet utilisateur n'a pas publié de tweets.</p>
 			   	</c:if>		   	
-	   			<c:if test="${USER.id == userTarget.id}">
+	   			<c:if test="${currentUser.id == userTarget.id}">
 			   		<p>Vous n'avez pas publié de tweets.</p>
 		   	</c:if>
 		   	</div>

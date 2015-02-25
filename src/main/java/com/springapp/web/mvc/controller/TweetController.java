@@ -1,5 +1,6 @@
 package com.springapp.web.mvc.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,23 +55,26 @@ public class TweetController {
             @RequestParam( value = "user", required = false ) String uid
     ){
         ModelAndView model = new ModelAndView();
-        model.setViewName("tweets");
-        List<Tweet> tweets;
         
         // Want specific user tweets
         if( uid != null ){
+            List<Tweet> tweets;
+            model.setViewName("tweets");
             User user = this.userService.findOne(uid);
+            model.addObject("currentUser", currentUser.getValue());
             model.addObject("userTarget", user);
             tweets = this.tweetService.findAllByUser(uid);
+            model.addObject("tweets", tweets);
         }
         // Want our tweets with subscriptions
-        else{
+        else{ 
+            model.setViewName("monFil");
             final boolean withSubscription = true;
-            tweets = this.tweetService.findAllByUser(this.currentUser.getValue().getId(), withSubscription);
-            model.addObject("userTarget", this.currentUser.getValue());
+            model.addObject("currentUser", currentUser.getValue());
+            HashMap<String, List<Tweet>> tweets = this.tweetService.findAllByUser(this.currentUser.getValue().getId(), withSubscription);
+            model.addObject("tweets", tweets);
         }
 
-        model.addObject("tweets", tweets);
         return model;
     }
     
@@ -85,8 +89,9 @@ public class TweetController {
             model.addObject("currentUser", currentUser.getValue());
             User user = this.userService.findOne(u.getId());
             List<Tweet> tweets = this.tweetService.findAllByUser(u.getId());
-            model.addObject("user", user);
+            model.addObject("userTarget", user);
             model.addObject("tweets", tweets);
+            model.addObject("isFollowing", userService.isFollowing(user.getId(), currentUser.getValue().getId()));
             return model;
     	}catch(UserNotFoundException une){
             ModelAndView model = new ModelAndView();

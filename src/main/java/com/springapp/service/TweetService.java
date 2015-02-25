@@ -7,12 +7,13 @@ import com.springapp.domain.exception.UserNotFoundException;
 import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface TweetService extends Service<Tweet>{
 
     public abstract List<Tweet> findAllByUser(Object id);
     
-    public abstract  List<Tweet> findAllByUser(Object id, boolean withSubscription);
+    public abstract  HashMap<String, List<Tweet>> findAllByUser(Object id, boolean withSubscription);
     
 }

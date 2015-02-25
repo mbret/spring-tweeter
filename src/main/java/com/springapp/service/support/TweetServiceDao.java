@@ -1,5 +1,6 @@
 package com.springapp.service.support;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class TweetServiceDao implements TweetService {
     }
 
     @Override
-    public List<Tweet> findAllByUser(Object id, boolean withSubscription) {
+    public HashMap<String, List<Tweet>> findAllByUser(Object id, boolean withSubscription) {
         return this.tweetDao.findAllByUser( id, withSubscription );
     }
 

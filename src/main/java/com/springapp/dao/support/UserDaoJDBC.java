@@ -33,6 +33,12 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	private static final String UPD_USER  = "UPDATE user SET mail = ?, name = ?, firstname = ? WHERE id = ?";
 	private static final String DEL_USER  = "DELETE FROM user WHERE id = ?";
 
+	private static final String FOLLOW  = "INSERT INTO follow(followed, follower) VALUES (?, ?)";
+	private static final String UNFOLLOW  = "DELETE FROM follow WHERE followed = ? AND followed = ?";
+	private static final String GET_FOLLOWERS  = "SELECT u.* FROM user u, follow f WHERE f.follower = ? AND f.followed = u.id";
+	private static final String IS_FOLLOWING  = "SELECT u.* FROM user u, follow f WHERE f.followed = ? AND f.follower = u.id AND f.follower = ?";
+	
+
     @Override
     public void setSimpleJdbcInsert(DataSource dataSource) {
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
@@ -42,6 +48,10 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
     
 	public List<User> getUsers() {
 		return jdbcTemplate.query(GET_USERS, new UserMapper());
+	}
+
+	public List<User> getFollowers(String followed) {
+		return jdbcTemplate.query(GET_FOLLOWERS, new UserMapper(), followed);
 	}
 
 	public User getUser(String id) {
@@ -65,6 +75,19 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	public void deleteUser(String id) {
 		jdbcTemplate.update(DEL_USER, id);
 	}
+	
+	public void unfollow(String followed, String follower) {
+		jdbcTemplate.update(UNFOLLOW, followed, follower);
+	}
+	
+	public void follow(String followed, String follower) {
+		jdbcTemplate.update(FOLLOW, followed, follower);
+	}
+
+	public List<User> findAllFollowers() {
+        List<User> list = this.jdbcTemplate.query(GET_FOLLOWERS, new UserMapper());
+        return list;
+    }
 
     @Override
     public List<User> findAll() {
@@ -105,5 +128,18 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 			return user;
 		}
 		
+	}
+
+
+	@Override
+	public boolean isFollowing(String followed, String follower) {
+		try{
+			User user = jdbcTemplate.queryForObject(IS_FOLLOWING, new UserMapper(), followed, follower);
+			if (user == null)
+				return false;
+			else return true;
+		}catch(EmptyResultDataAccessException a){
+			return false;
+		}
 	}
 }

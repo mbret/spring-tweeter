@@ -25,5 +25,13 @@ public interface UserDao extends Dao<User>{
 	public void deleteUser(String id);
 
 	public User getUserByName(String name);
+	
+	public void unfollow(String followed, String follower);
+	
+	public void follow(String followed, String follower);
+
+	public boolean isFollowing(String followed, String follower);
+	
+	public List<User> getFollowers(String followed);
 
 }

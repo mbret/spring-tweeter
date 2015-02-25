@@ -8,6 +8,9 @@ import java.util.Map;
 
 import com.springapp.dao.TweetDao;
 import com.springapp.domain.model.Tweet;
+import com.springapp.domain.model.User;
+import com.springapp.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -28,6 +31,7 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
     private static final String GET_TWEETS_BY_USER  = "SELECT * FROM tweet WHERE user = ?";
     private static final String GET_TWEET           = "SELECT * FROM tweet WHERE id = ?";
     private static final String CREATE              = "INSERT INTO tweet(content, user) VALUES(?, ?)";
+	private UserService userService;
 
     @Override
     @Autowired
@@ -35,6 +39,12 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("tweet")
                 .usingGeneratedKeyColumns("id");
+    }
+    
+
+    @Autowired
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
     
     @Override
@@ -64,14 +74,20 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     @Override
     public List<Tweet> findAllByUser(Object id) {
+    	
         List list = this.jdbcTemplate.query(GET_TWEETS_BY_USER, new TweetMapper(), id);
         return list;
     }
 
     @Override
-    public List<Tweet> findAllByUser(Object id, boolean withSubscriptions) {
-        List list = this.jdbcTemplate.query(GET_TWEETS_BY_USER, new TweetMapper(), id);
-        return list;
+    public HashMap<String, List<Tweet>> findAllByUser(Object id, boolean withSubscriptions) {
+    	List<User> users = userService.getFollowers((String)id);
+    	HashMap<String, List<Tweet>> tweets = new HashMap<String, List<Tweet>>();
+    	for(User u : users){
+    		List<Tweet> tw = this.jdbcTemplate.query(GET_TWEETS_BY_USER, new TweetMapper(), u.getId());
+        	tweets.put(u.getName(), tw);
+    	}
+        return tweets;
     }
 
     private class TweetMapper implements RowMapper<Tweet> {

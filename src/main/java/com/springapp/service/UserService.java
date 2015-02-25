@@ -25,6 +25,14 @@ public interface UserService extends Service<User>{
 
 	public User getUserByName(String name) throws UserNotFoundException;
 
+	
+	public void unfollow(String followed, String follower);
+
+	public void follow(String followed, String follower);
+	public boolean isFollowing(String followed, String follower);
+	
+	public List<User> getFollowers(String followed);
+
 //    public void addUser(User user) throws UserExistException;
 
 }

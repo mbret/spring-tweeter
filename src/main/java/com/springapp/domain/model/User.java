@@ -23,14 +23,26 @@ public class User{
     @Column(name = "password")
     private String password;
 
+    
+    /*
     @ManyToMany(cascade = CascadeType.MERGE)
-//    @JoinTable(
-//            name = "subscription",
-//            joinColumns =
-//    )
+    @JoinTable(
+            name = "follow",
+            joinColumns = {@JoinColumn(name="followed", referencedColumnName="id")}, 
+            inverseJoinColumns={@JoinColumn(name="follower", referencedColumnName="id")}
+    )
     private List<User> subscriptions;
     
-    public User() {
+    
+    public List<User> getSubscriptions() {
+		return subscriptions;
+	}
+
+	public void setSubscriptions(List<User> subscriptions) {
+		this.subscriptions = subscriptions;
+	}*/
+
+	public User() {
     }
 
     public User(String firstName, String name, String mail, String password) {

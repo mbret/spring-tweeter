@@ -132,6 +132,16 @@ public class UserServiceDao implements UserService {
             throw new UserNotFoundException("User not found " + name);
         }
     }
+    
+
+	
+	public void unfollow(String followed, String follower){
+		userDao.unfollow(followed, follower);
+	}
+	
+	public void follow(String followed, String follower){
+		userDao.follow(followed, follower);
+	}
 
     public void unregisterAccount(User u) {
         // TODO
@@ -151,4 +161,14 @@ public class UserServiceDao implements UserService {
     public List findAll() {
         return this.userDao.findAll();
     }
+
+	@Override
+	public boolean isFollowing(String followed, String follower) {
+		return userDao.isFollowing(followed, follower);
+	}
+	
+	@Override
+	public List<User> getFollowers(String followed){
+		return userDao.getFollowers(followed);
+	}
 }

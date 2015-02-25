@@ -63,6 +63,9 @@ public class IndexController extends SuperController{
         ModelAndView model = new ModelAndView();
         model.setViewName("index");
         model.addObject("currentUser", currentUser.getValue());
+        if(currentUser != null){
+        	
+        }
         return model;
     }
 
