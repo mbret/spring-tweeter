@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2015 at 02:40 PM
+-- Generation Time: Feb 25, 2015 at 01:24 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `tweet` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `content` varchar(200) NOT NULL,
-  `user` int(10) NOT NULL,
-  `date` timestamp NOT NULL,
+  `user` varchar(200) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -45,7 +45,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `firstName` varchar(200) NOT NULL,
   `mail` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`)
+  `password` varchar(30) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mail` (`mail`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

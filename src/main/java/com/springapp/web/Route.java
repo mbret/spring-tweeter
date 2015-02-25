@@ -36,6 +36,9 @@ public class Route {
         routes.put("searchUser", searchUser.substring(1));
         routes.put("profile", profile.substring(1));
         routes.put("tweets", tweets.substring(1));
+        routes.put("users", users.substring(1));
+        routes.put("subscribe", subscribe.substring(1));
+        routes.put("unsubscribe", unsubscribe.substring(1));
     }
 
     public static HashMap<String, String> getRoutes()

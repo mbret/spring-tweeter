@@ -16,15 +16,7 @@
 		<jsp:include page="../common/menu.jsp" />
 		<div class="corps">
 			<div class="tweets" role="content">     
-				<article>     
-					<p>Tweet 2</p>
-				</article>
-				<hr/>
-				<article>
-					<p>Tweet 2</p>
-				</article>
-				<li><a href="${contextPath}/example.html">Example page</a></li>
-	    		<li><a href="${contextPath}/users.html">See users</a></li>
+	    		<li><a href="${contextPath}/${routes.users}">See users</a></li>
 	    		<li><a href="${contextPath}/${routes.postTweet}">Post a tweet</a></li>
 			</div>
 		</div>

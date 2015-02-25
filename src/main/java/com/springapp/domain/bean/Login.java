@@ -1,4 +1,4 @@
-package com.springapp.domain.model;
+package com.springapp.domain.bean;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;

@@ -2,7 +2,7 @@ package com.springapp.web.mvc.controller;
 
 import com.springapp.domain.ScopedValue;
 import com.springapp.domain.exception.AuthenticationException;
-import com.springapp.domain.model.Login;
+import com.springapp.domain.bean.Login;
 import com.springapp.domain.model.User;
 import com.springapp.service.UserService;
 import com.springapp.web.Route;
@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
