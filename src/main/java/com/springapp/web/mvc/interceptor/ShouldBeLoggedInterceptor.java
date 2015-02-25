@@ -26,10 +26,7 @@ public class ShouldBeLoggedInterceptor extends HandlerInterceptorAdapter {
         
         if(!currentUser.isDefined() || !currentUser.getValue().isValid()) {
             response.sendRedirect( Route.login );
-//            model.addObject("currentUser", currentUser.getValue());
-//            model.setViewName("tweet-post");
-//            model.addObject("command", new Tweet());
-//            model.addObject("route", Route.getRoutes());
+            return false;
         }
 
         // Expose user

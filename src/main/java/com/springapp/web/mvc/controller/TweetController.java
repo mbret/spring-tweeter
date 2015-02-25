@@ -86,7 +86,6 @@ public class TweetController {
     		User u = this.userService.getUserByName(userName);
             ModelAndView model = new ModelAndView();
             model.setViewName("tweets");
-            model.addObject("currentUser", currentUser.getValue());
             User user = this.userService.findOne(u.getId());
             List<Tweet> tweets = this.tweetService.findAllByUser(u.getId());
             model.addObject("userTarget", user);

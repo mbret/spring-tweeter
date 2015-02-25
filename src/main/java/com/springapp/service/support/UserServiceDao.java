@@ -41,7 +41,7 @@ public class UserServiceDao implements UserService {
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
             isolation = Isolation.SERIALIZABLE,
             rollbackFor = {RuntimeException.class, UserExistException.class})
-    public void registerAccount(User u) throws UserExistException {
+    public User registerAccount(User u) throws UserExistException {
 
         // Set User UUID
         u.setId(UUID.randomUUID().toString());
@@ -62,6 +62,7 @@ public class UserServiceDao implements UserService {
         // Send mail
         // TODO
 
+        return u;
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED,

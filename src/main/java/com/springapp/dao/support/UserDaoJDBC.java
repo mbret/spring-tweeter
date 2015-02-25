@@ -34,7 +34,7 @@ public class UserDaoJDBC extends BaseDaoJDBC implements UserDao {
 	private static final String DEL_USER  = "DELETE FROM user WHERE id = ?";
 
 	private static final String FOLLOW  = "INSERT INTO follow(followed, follower) VALUES (?, ?)";
-	private static final String UNFOLLOW  = "DELETE FROM follow WHERE followed = ? AND followed = ?";
+	private static final String UNFOLLOW  = "DELETE FROM follow WHERE followed = ? AND follower = ?";
 	private static final String GET_FOLLOWERS  = "SELECT u.* FROM user u, follow f WHERE f.follower = ? AND f.followed = u.id";
 	private static final String IS_FOLLOWING  = "SELECT u.* FROM user u, follow f WHERE f.followed = ? AND f.follower = u.id AND f.follower = ?";
 	

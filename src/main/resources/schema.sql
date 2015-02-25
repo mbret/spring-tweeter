@@ -2,10 +2,17 @@
 -- version 4.1.14
 -- http://www.phpmyadmin.net
 --
+<<<<<<< HEAD
 -- Client :  127.0.0.1
 -- Généré le :  Mer 25 Février 2015 à 00:26
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
+=======
+-- Host: 127.0.0.1
+-- Generation Time: Feb 25, 2015 at 01:24 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
+>>>>>>> 561010c50cf8c690b15c5d06e10192181f378915
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -47,8 +54,12 @@ CREATE TABLE IF NOT EXISTS `tweet` (
   `user` varchar(200) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
+<<<<<<< HEAD
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
+=======
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+>>>>>>> 561010c50cf8c690b15c5d06e10192181f378915
 
 -- --------------------------------------------------------
 
@@ -62,7 +73,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `mail` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL,
   `password` varchar(30) NOT NULL,
+<<<<<<< HEAD
   PRIMARY KEY (`id`)
+=======
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `mail` (`mail`)
+>>>>>>> 561010c50cf8c690b15c5d06e10192181f378915
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 

@@ -9,19 +9,23 @@
 <div class="main">
 	<jsp:include page="../common/menu.jsp" />
 	<div class="corps">
-       <form:form method="POST" action="${contextPath}/${routes.login}">
+        
+       <form:form method="POST" action="${contextPath}/${routes.login}" modelAttribute="login">
        		<c:if test="${not empty message}">
        			<p class="warning">${message}</p>
        		</c:if>
+           
+            ${credentialError}
+           
 		    <table>
 			    <tr>
-			        <td><label for="mail">Email :</label></td>
-			        <td><form:input path="mail" /></td>
-			        <td><form:errors path="mail" /></td>
+			        <td><label for="email">Email :</label></td>
+			        <td><form:input id="email" path="email" /></td>
+			        <td><form:errors path="email" /></td>
 			    </tr>		    
 			    <tr>
 			        <td><label for="password">Mot de passe :</label></td>
-			        <td><form:input path="password" /></td>
+			        <td><form:input type="password" path="password" /></td>
 			        <td><form:errors path="password" /></td>
 			    </tr>
 			</table>

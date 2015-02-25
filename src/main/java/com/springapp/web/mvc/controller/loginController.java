@@ -1,25 +1,28 @@
 package com.springapp.web.mvc.controller;
 
+import com.springapp.domain.ScopedValue;
+import com.springapp.domain.exception.AuthenticationException;
+import com.springapp.domain.bean.Login;
+import com.springapp.domain.model.User;
+import com.springapp.service.UserService;
+import com.springapp.web.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springapp.domain.ScopedValue;
-import com.springapp.domain.exception.AuthenticationException;
-import com.springapp.domain.model.User;
-import com.springapp.service.UserService;
-import com.springapp.web.Route;
+import javax.validation.Valid;
 
 @Controller
 public class loginController {
     
     private UserService userService;
-    
+
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -38,10 +41,11 @@ public class loginController {
      * @return
      */
     @RequestMapping(value = Route.login)
-    public ModelAndView loginForm(){
+    public ModelAndView loginForm(
+            Login login
+    ){
         ModelAndView model = new ModelAndView();
         model.setViewName("login");
-        model.addObject("command", new User());
         return model;
     }
 
@@ -51,24 +55,29 @@ public class loginController {
      */
     @RequestMapping( value = Route.login, method = RequestMethod.POST)
     public ModelAndView login(
-            @ModelAttribute User user, Model model
+            @Valid Login login,
+            BindingResult bindingResult,
+            Model m
     ){
         ModelAndView mod = new ModelAndView();
-        try {
-            User u = this.userService.authenticate(user.getMail(), user.getPassword());
-            currentUser.setValue(u);
-            return new ModelAndView("redirect:" + Route.host);
-        } catch (AuthenticationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            String message = "Login ou mot de passe incorrect.";
-            mod.setViewName("login");
-            if(message!=null){
-                mod.addObject("message", message);
-            }
-            mod.addObject("command", new User());
-            return mod;
+        mod.setViewName("login");
+        
+        if(bindingResult.hasErrors()){
+            
         }
+        else{
+            try {
+                User u = this.userService.authenticate( login.getEmail(), login.getPassword() );
+                currentUser.setValue(u);
+                return new ModelAndView("redirect:" + Route.host);
+            } catch (AuthenticationException e) {
+//                e.printStackTrace();
+//                bindingResult.addError(new ObjectError("credential", "Invalid credentials"));
+                mod.addObject("credentialError", "Invalid credentials");
+            }
+        }
+
+        return mod;
     }
     
     

@@ -31,7 +31,7 @@ import java.util.List;
  * Use ResponseEntity<T> to return the HTTP response with your custom status or headers.
  */
 @Controller
-public class IndexController extends SuperController{
+public class IndexController{
 
     private UserService userService;
     private TweetService tweetService;

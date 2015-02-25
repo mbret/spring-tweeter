@@ -3,20 +3,21 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 
 <c:choose>
-      <c:when test="${not empty currentUser}">
+      <c:when test="${USER != null}">
 		<div class="menu">
 			<div class="button-group">
 				<ul>
-					<li><a href="${pageContext.request.contextPath}/${routes.tweets}" class="button">Votre fil</a></li>
-					<li><a href="${pageContext.request.contextPath}/${routes.tweets}?user=${currentUser.id}" class="button">Mes tweets</a></li>
+                    <li><a href="${pageContext.request.contextPath}/${routes.home}" class="button">Accueil</a></li>
+                    <li><a href="${pageContext.request.contextPath}/${routes.tweets}" class="button">Votre fil</a></li>
+					<li><a href="${pageContext.request.contextPath}/${routes.tweets}?user=${USER.id}" class="button">Mes tweets</a></li>
 					<li><a href="#" class="button">Hashtags</a></li>
 					<li><a href="#" class="button">Profil</a></li>
 				</ul> 	
 		   	</div>
 		   	<div class="button-indiv">
 		   		<div><a href="${pageContext.request.contextPath}/${routes.logout}"><p>[Se déconnecter]</p></a></div>
-		   		<div><a href="${pageContext.request.contextPath}/tweets/post"><img src="${pageContext.request.contextPath}/media/images/compose.png"/></a></div>
-		   		<div><form method="get" action="${pageContext.request.contextPath}/users/searchUser"><input type="text" placeholder="Rechercher un utilisateur" id="search" name="userName" /></form></div>
+		   		<div><a href="${pageContext.request.contextPath}/${routes.postTweet}"><img src="${pageContext.request.contextPath}/media/images/compose.png"/></a></div>
+		   		<div><form method="get" action="${pageContext.request.contextPath}/${routes.searchUser}"><input type="text" placeholder="Rechercher un utilisateur" id="search" name="userName" /></form></div>
 		   	</div>          
 		</div>
       </c:when>	
