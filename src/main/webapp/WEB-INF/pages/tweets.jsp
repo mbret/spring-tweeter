@@ -41,7 +41,11 @@
         <c:forEach var="tweet" items="${tweets}">
             <hr />
             <div class="unTweet">
-                <p><span class="tweetUser"><c:out value="${userTarget.name}"/></span><span class="tweetDate"> Le : <c:out value="${tweet.date}"/> </span></p>
+                <p>
+                    <span class="tweetUser">
+                        <c:out value="${userTarget.firstName} ${userTarget.name}"/></span><span class="tweetDate"> Le : <c:out value="${tweet.date}"/>
+                    </span>
+                </p>
                 <p><c:out value="${tweet.content}"/> </p>
             </div>
         </c:forEach>

@@ -81,13 +81,8 @@ public class TweetController {
     	try{
     		User u = this.userService.getUserByName(userName);
             ModelAndView model = new ModelAndView();
-            model.setViewName("tweets");
-            model.addObject("currentUser", currentUser.getValue());
             User user = this.userService.findOne(u.getId());
-            List<Tweet> tweets = this.tweetService.findAllByUser(u.getId());
-            model.addObject("user", user);
-            model.addObject("tweets", tweets);
-            return model;
+            return new ModelAndView("redirect:" + Route.tweets + "?user=" + user.getId());
     	}catch(UserNotFoundException une){
             ModelAndView model = new ModelAndView();
     		model.setViewName("error");
