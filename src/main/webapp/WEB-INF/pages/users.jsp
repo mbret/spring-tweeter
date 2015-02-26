@@ -16,8 +16,7 @@
             <c:forEach var="current" items="${users}">
                 <tr>
                     <td>Name: <c:out value="${current.name}"/> </td>
-                    <td><a href="${contextPath}/${routes.tweets}?user=${current.id}">See user tweets</a></td>
-                    <td><a href="#">Subscribe</a></td>
+                    <td><a href="${contextPath}/${routes.tweets}?user=${current.id}">Voir le profil</a></td>
                 </tr>
             </c:forEach>
         </table>

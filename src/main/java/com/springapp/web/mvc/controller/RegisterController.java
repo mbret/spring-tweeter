@@ -72,7 +72,7 @@ public class RegisterController {
                 User user = new User(register.getFirstName(), register.getLastName(), register.getEmail(), register.getPassword());
                 user = this.userService.registerAccount(user);
                 this.currentUser.setValue(user);
-                return new ModelAndView("redirect:" + Route.tweet);
+                return new ModelAndView("redirect:" + Route.host);
                 
             } catch (UserExistException e) {
 //                e.printStackTrace();

@@ -16,8 +16,8 @@
 		<jsp:include page="../common/menu.jsp" />
 		<div class="corps">
 			<div class="tweets" role="content">     
-	    		<li><a href="${contextPath}/${routes.users}">See users</a></li>
-	    		<li><a href="${contextPath}/${routes.postTweet}">Post a tweet</a></li>
+	    		<li><a href="${contextPath}/${routes.users}">Voir tous les utilisateurs</a></li>
+	    		<li><a href="${contextPath}/${routes.postTweet}">Poster un tweet</a></li>
 			</div>
 		</div>
 		<jsp:include page="../common/footer.jsp" />  
