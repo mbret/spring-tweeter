@@ -1,16 +1,9 @@
 package com.springapp.dao.support;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import com.springapp.dao.TweetDao;
 import com.springapp.domain.model.Tweet;
 import com.springapp.domain.model.User;
 import com.springapp.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
@@ -21,6 +14,10 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
 
 @Repository
 @Qualifier("tweetdao-jdbc")
@@ -38,6 +35,8 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
     public void setSimpleJdbcInsert(DataSource dataSource) {
         this.simpleJdbcInsert = new SimpleJdbcInsert(dataSource)
                 .withTableName("tweet")
+                // mandatory to use default value (for date)
+                .usingColumns("user", "content")
                 .usingGeneratedKeyColumns("id");
     }
     
@@ -60,8 +59,7 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     @Override
     public void create(Tweet tweet) {
-        // mandatory to use default value (for date)
-        this.simpleJdbcInsert.usingColumns("user", "content");
+
         
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("user", tweet.getUserID())

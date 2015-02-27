@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 /**
  * http://www.javacodegeeks.com/2010/06/spring-3-restful-web-services.html.
@@ -48,21 +46,22 @@ public class SubscriptionControllerREST {
     @RequestMapping( value = "/tweets", method = RequestMethod.GET)
     @ResponseStatus( HttpStatus.OK )
     @ResponseBody
-    public List findAllTweets(){
+    public HashMap findAllTweets(){
 
-        HashMap<String, Object> a = new HashMap<>();
-        a.put("user", this.apiUser.getValue());
-        a.put("tweets", this.tweetService.findAllByUser(this.apiUser.getValue().getId()));
+//        HashMap<String, Object> a = new HashMap<>();
+//        a.put("user", this.apiUser.getValue());
+//        a.put("tweets", this.tweetService.findAllByUser(this.apiUser.getValue().getId()));
+//
+//        HashMap<String, Object> b = new HashMap<>();
+//        b.put("user", this.apiUser.getValue());
+//        b.put("tweets", this.tweetService.findAllByUser(this.apiUser.getValue().getId()));
+//
+//        List<HashMap> subscriptions = new ArrayList<>();
+//        subscriptions.add(a);
+//        subscriptions.add(b);
 
-        HashMap<String, Object> b = new HashMap<>();
-        b.put("user", this.apiUser.getValue());
-        b.put("tweets", this.tweetService.findAllByUser(this.apiUser.getValue().getId()));
-        
-        List<HashMap> subscriptions = new ArrayList<>();
-        subscriptions.add(a);
-        subscriptions.add(b);
-        
-        return subscriptions;
+        return this.tweetService.findAllByUser(this.apiUser.getValue().getId(), true); // withFollower = true
+//        return subscriptions;
 
     }
 
