@@ -7,6 +7,7 @@ import com.springapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -54,7 +55,12 @@ public class TweetDaoJDBC extends BaseDaoJDBC implements TweetDao {
 
     @Override
     public Tweet findOne(Object id) {
-        return this.jdbcTemplate.queryForObject(GET_TWEET, new TweetMapper(), id);
+        try{
+            return this.jdbcTemplate.queryForObject(GET_TWEET, new TweetMapper(), id);
+        }
+        catch(EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     @Override

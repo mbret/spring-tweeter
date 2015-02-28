@@ -1,8 +1,12 @@
 package com.springapp.web.mvc.controller;
 
-import java.util.HashMap;
-import java.util.List;
-
+import com.springapp.domain.ScopedValue;
+import com.springapp.domain.exception.UserNotFoundException;
+import com.springapp.domain.model.Tweet;
+import com.springapp.domain.model.User;
+import com.springapp.service.TweetService;
+import com.springapp.service.UserService;
+import com.springapp.web.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -13,13 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.springapp.domain.ScopedValue;
-import com.springapp.domain.exception.UserNotFoundException;
-import com.springapp.domain.model.Tweet;
-import com.springapp.domain.model.User;
-import com.springapp.service.TweetService;
-import com.springapp.service.UserService;
-import com.springapp.web.Route;
+import java.util.HashMap;
+import java.util.List;
 
 @Controller
 public class TweetController {
@@ -65,6 +64,7 @@ public class TweetController {
             model.addObject("userTarget", user);
             tweets = this.tweetService.findAllByUser(uid);
             model.addObject("tweets", tweets);
+            model.addObject("isFollowing", userService.isFollowing(user.getId(), currentUser.getValue().getId()));
         }
         // Want our tweets with subscriptions
         else{ 
